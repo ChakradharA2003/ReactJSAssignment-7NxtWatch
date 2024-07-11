@@ -44,6 +44,7 @@ class Home extends Component {
     bannerVisible: true,
     apiCurrentStatus: apiConstants.initial,
     searchValue: '',
+    searching: '',
     videos: [],
   }
 
@@ -77,7 +78,7 @@ class Home extends Component {
           profileImageUrl: video.channel.profile_image_url,
         },
       }))
-      console.log(updatedData)
+      // console.log(updatedData)
       this.setState({
         videos: updatedData,
         apiCurrentStatus: apiConstants.success,
@@ -141,8 +142,22 @@ class Home extends Component {
     }
   }
 
+  onChangeSearchInput = event => {
+    this.setState({
+      searching: event.target.value,
+    })
+  }
+
+  onSearchVideo = async () => {
+    const {searching} = this.state
+    await this.setState({
+      searchValue: searching,
+    })
+    await this.getHomeRouteDetails()
+  }
+
   render() {
-    const {bannerVisible} = this.state
+    const {bannerVisible, searching} = this.state
     return (
       <>
         <Header />
@@ -170,8 +185,17 @@ class Home extends Component {
 
             <SearchVideosContainer>
               <SearchBarContainer>
-                <SearchInput type="search" placeholder="Search" />
-                <SearchButton type="button">
+                <SearchInput
+                  type="search"
+                  placeholder="Search"
+                  value={searching}
+                  onChange={this.onChangeSearchInput}
+                />
+                <SearchButton
+                  as="button"
+                  type="button"
+                  onClick={this.onSearchVideo}
+                >
                   <GoSearch size={18} />
                 </SearchButton>
               </SearchBarContainer>

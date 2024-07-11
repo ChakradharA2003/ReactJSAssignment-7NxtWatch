@@ -1,0 +1,5 @@
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .react-player-style {
+    height: 120px;
+  }
+}

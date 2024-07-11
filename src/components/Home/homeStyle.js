@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const HomeContainer = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: 0px;
 `
 export const SectionsList = styled.div`
   width: 30%;
@@ -17,6 +18,7 @@ export const HomeContentContainer = styled.div`
   width: 100vw;
   overflow: auto;
   padding: 20px 10px 20px;
+  margin: 0px;
 `
 export const BannerContainer = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
@@ -73,6 +75,7 @@ export const SearchInput = styled.input`
   width: 330px;
   padding: 8px;
   margin-top: 10px;
+  outline: none;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 70%;
   }
@@ -84,6 +87,7 @@ export const SearchButton = styled.button`
   border-width: 1px;
   padding: 2px 25px 2px;
   align-self: center;
+  cursor: pointer;
 `
 export const SearchVideosContainer = styled.div`
   background-color: #ebebeb;

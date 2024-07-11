@@ -30,7 +30,7 @@ const VideoItem = props => {
   const publishedSplit = publishedAgo.split(' ')
   // console.log(publishedAt)
   const daysAgo = publishedSplit.splice(1, 1).join(' ')
-  console.log(daysAgo)
+  // console.log(daysAgo)
   return (
     <Link to={id} className="link-item">
       <LinkItem>
