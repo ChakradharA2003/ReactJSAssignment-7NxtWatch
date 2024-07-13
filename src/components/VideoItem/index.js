@@ -32,7 +32,7 @@ const VideoItem = props => {
   const daysAgo = publishedSplit.splice(1, 1).join(' ')
   // console.log(daysAgo)
   return (
-    <Link to={id} className="link-item">
+    <Link to={`/videos/${id}`} className="link-item">
       <LinkItem>
         <ThumbNailImage src={thumbnailUrl} alt="video thumbnail" />
         <VideoDetails>

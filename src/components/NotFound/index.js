@@ -1,4 +1,4 @@
 // import Header from '../Header/index'
 
-const NotFound = () => <>.</>
+const NotFound = () => <>notfound</>
 export default NotFound

@@ -20,7 +20,7 @@ import {
   PubOpinionDetails,
   ViewsList,
   PublishedList,
-  Buttons,
+  Button,
   HorizontalLine,
   ChannelDetailsContainer,
   ChannelImage,
@@ -48,6 +48,9 @@ class VideoItemDetails extends Component {
   state = {
     apiCurrentStatus: apiConstants.loading,
     videoDetails: {},
+    isLiked: false,
+    isDisliked: false,
+    isSaved: false,
   }
 
   componentDidMount() {
@@ -101,9 +104,33 @@ class VideoItemDetails extends Component {
     </LoadingContainer>
   )
 
+  onClickedLikeButton = () => {
+    this.setState(prevState => ({
+      isLiked: !prevState.isLiked,
+      isDisliked: false,
+    }))
+  }
+
+  onClickedDislikeButton = () => {
+    this.setState(prevState => ({
+      isDisliked: !prevState.isDisliked,
+      isLiked: false,
+    }))
+  }
+
+  onClickedSaveButton = () => {
+    this.setState(prevState => ({
+      isSaved: !prevState.isSaved,
+    }))
+  }
+
   successView = () => {
-    const {videoDetails} = this.state
-    console.log(videoDetails)
+    const {videoDetails, isLiked, isDisliked, isSaved} = this.state
+    // console.log(videoDetails)
+    // console.log(isLiked, isDisliked, isSaved)
+    const isLikedActive = isLiked ? 'Active' : 'Not-Active'
+    const isDislikedActive = isDisliked ? 'Active' : 'Not-Active'
+    const isSavedActive = isSaved ? 'Active' : 'Not-Active'
     const {
       description,
       publishedAt,
@@ -142,19 +169,31 @@ class VideoItemDetails extends Component {
               </PublishedOpinionUnOrderLists>
               <PublishedOpinionUnOrderLists>
                 <li>
-                  <Buttons>
-                    <BiLike /> Like
-                  </Buttons>
+                  <Button
+                    type="button"
+                    theme={isLikedActive}
+                    onClick={this.onClickedLikeButton}
+                  >
+                    <BiLike size={20} /> Like
+                  </Button>
                 </li>
                 <li>
-                  <Buttons>
-                    <BiDislike /> Dislike
-                  </Buttons>
+                  <Button
+                    type="button"
+                    theme={isDislikedActive}
+                    onClick={this.onClickedDislikeButton}
+                  >
+                    <BiDislike size={20} /> Dislike
+                  </Button>
                 </li>
                 <li>
-                  <Buttons>
-                    <RiMenuAddLine /> Save
-                  </Buttons>
+                  <Button
+                    type="button"
+                    theme={isSavedActive}
+                    onClick={this.onClickedSaveButton}
+                  >
+                    <RiMenuAddLine size={20} /> Save
+                  </Button>
                 </li>
               </PublishedOpinionUnOrderLists>
             </PublishedOpinionDetailsContainer>
@@ -193,19 +232,31 @@ class VideoItemDetails extends Component {
               </PublishedOpinionUnOrderLists>
               <PublishedOpinionUnOrderLists>
                 <li>
-                  <Buttons>
-                    <BiLike /> Like
-                  </Buttons>
+                  <Button
+                    type="button"
+                    theme={isLikedActive}
+                    onClick={this.onClickedLikeButton}
+                  >
+                    <BiLike size={20} /> Like
+                  </Button>
                 </li>
                 <li>
-                  <Buttons>
-                    <BiDislike /> Dislike
-                  </Buttons>
+                  <Button
+                    type="button"
+                    theme={isDislikedActive}
+                    onClick={this.onClickedDislikeButton}
+                  >
+                    <BiDislike size={20} /> Dislike
+                  </Button>
                 </li>
                 <li>
-                  <Buttons>
-                    <RiMenuAddLine /> Save
-                  </Buttons>
+                  <Button
+                    type="button"
+                    theme={isSavedActive}
+                    onClick={this.onClickedSaveButton}
+                  >
+                    <RiMenuAddLine size={20} /> Save
+                  </Button>
                 </li>
               </PublishedOpinionUnOrderLists>
             </PublishedOpinionDetailsContainer>

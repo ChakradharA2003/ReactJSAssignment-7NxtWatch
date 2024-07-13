@@ -8,7 +8,7 @@ import {GoSearch} from 'react-icons/go'
 
 import Header from '../Header'
 import VideoItem from '../VideoItem'
-
+import SideBar from '../SideBar'
 import {
   HomeContainer,
   SectionsList,
@@ -162,7 +162,9 @@ class Home extends Component {
       <>
         <Header />
         <HomeContainer>
-          <SectionsList>.</SectionsList>
+          <SectionsList>
+            <SideBar />
+          </SectionsList>
           <HomeContentContainer>
             <BannerContainer visible={bannerVisible}>
               <BannerDetailsContainer>

@@ -10,6 +10,7 @@ export const VideoDetailsContainer = styled.div`
   display: flex;
   flex-direction: row;
   overflow: auto;
+  width: 100%;
 `
 export const SectionsList = styled.div`
   width: 30%;
@@ -25,6 +26,9 @@ export const VideoDetailsSuccessView = styled.div`
   padding: 20px;
   width: 100%;
   overflow: auto;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 100%;
+  }
 `
 export const LoadingContainer = styled.div`
   height: 100vh;
@@ -64,7 +68,7 @@ export const PublishedOpinionUnOrderLists = styled.ul`
   margin: 0px;
 `
 export const PubOpinionDetails = styled.p`
-  color: #94a3b8;
+  color: #64748b;
   font-family: 'Roboto';
   font-size: 15px;
   font-weight: 400;
@@ -74,14 +78,18 @@ export const ViewsList = styled.li``
 export const PublishedList = styled.li`
   list-style-type: disc;
 `
-export const Buttons = styled.li`
+export const Button = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #94a3b8;
+  color: ${props => (props.theme === 'Active' ? '#2563eb' : '#64748b')};
   font-family: 'Roboto';
   font-weight: 400;
   margin: 10px;
+  font-size: 30px
+  background-color: transparent;
+  border-width: 0px;
+  cursor: pointer;
 `
 export const HorizontalLine = styled.hr`
   margin: 2px solid #181818;
@@ -117,7 +125,7 @@ export const ChannelName = styled.h1`
   }
 `
 export const ChannelSubscribersCount = styled.p`
-  color: #94a3b8;
+  color: #64748b;
   font-family: 'Roboto';
   font-size: 14px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
@@ -136,10 +144,11 @@ export const ChannelVideoDescription = styled.p`
 export const MobileView = styled.div`
   display: none;
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    display: flex;
+    display: block;
   }
 `
 export const DesktopView = styled.div`
+  display: block;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     display: none;
   }
