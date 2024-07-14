@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const SectionItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #f9f9f9;
+  background-color: transparent;
   width: 100%;
 `
 export const LinkItem = styled.div`
@@ -12,8 +12,21 @@ export const LinkItem = styled.div`
   justify-content: flex-start;
   align-items: center;
   align-self: stretch;
-  background-color: ${props =>
-    props.bgColor === 'Active' ? '#e2e8f0' : '#f9f9f9'};
+  background-color: ${props => {
+    if (props.linkItemBgColor === 'dark' && props.bgColor === 'Active') {
+      return '#424242'
+    }
+    if (props.linkItemBgColor === 'dark' && props.bgColor === 'Inactive') {
+      return '#0f0f0f'
+    }
+    if (props.linkItemBgColor === 'light' && props.bgColor === 'Active') {
+      return '#e2e8f0'
+    }
+    if (props.linkItemBgColor === 'light' && props.bgColor === 'Inactive') {
+      return '#f9f9f9'
+    }
+    return ''
+  }};
   width: 100%;
   height: 40px;
   padding: 4px 15px 4px;
@@ -21,7 +34,7 @@ export const LinkItem = styled.div`
   margin-bottom: 2px;
 `
 export const LinkName = styled.p`
-  color: #475569;
+  color: ${props => (props.linkItemBgColor === 'dark' ? '#ffffff' : '#475569')};
   font-family: 'Roboto';
   font-size: 20px;
   font-weight: ${props => (props.fontWeight === 'High' ? 'bold' : 300)};

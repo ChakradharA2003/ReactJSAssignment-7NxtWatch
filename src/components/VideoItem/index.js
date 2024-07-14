@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import {formatDistanceToNow} from 'date-fns'
-
+import ActiveMenuThemeSavedVideosContext from '../../Context/ActiveMenuThemeSavedVideosContext'
 import {
   LinkItem,
   ThumbNailImage,
@@ -32,22 +32,30 @@ const VideoItem = props => {
   const daysAgo = publishedSplit.splice(1, 1).join(' ')
   // console.log(daysAgo)
   return (
-    <Link to={`/videos/${id}`} className="link-item">
-      <LinkItem>
-        <ThumbNailImage src={thumbnailUrl} alt="video thumbnail" />
-        <VideoDetails>
-          <ChannelImage src={profileImageUrl} alt="channel logo" />
-          <VideoDescriptionContainer>
-            <VideoTitle>{title}</VideoTitle>
-            <ChannelName>{name}</ChannelName>
-            <ViewsPublishContainer>
-              <ViewCount>{viewCount} views *</ViewCount>
-              <YearsAgo>{daysAgo} years ago</YearsAgo>
-            </ViewsPublishContainer>
-          </VideoDescriptionContainer>
-        </VideoDetails>
-      </LinkItem>
-    </Link>
+    <ActiveMenuThemeSavedVideosContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const color = isDark ? 'dark' : 'light'
+        return (
+          <Link to={`/videos/${id}`} className="link-item">
+            <LinkItem>
+              <ThumbNailImage src={thumbnailUrl} alt="video thumbnail" />
+              <VideoDetails>
+                <ChannelImage src={profileImageUrl} alt="channel logo" />
+                <VideoDescriptionContainer>
+                  <VideoTitle color={color}>{title}</VideoTitle>
+                  <ChannelName>{name}</ChannelName>
+                  <ViewsPublishContainer>
+                    <ViewCount>{viewCount} views *</ViewCount>
+                    <YearsAgo>{daysAgo} years ago</YearsAgo>
+                  </ViewsPublishContainer>
+                </VideoDescriptionContainer>
+              </VideoDetails>
+            </LinkItem>
+          </Link>
+        )
+      }}
+    </ActiveMenuThemeSavedVideosContext.Consumer>
   )
 }
 export default VideoItem

@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const DesktopHeaderContainer = styled.div`
-  background-color: #f9f9f9;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,7 +13,8 @@ export const DesktopHeaderContainer = styled.div`
   }
 `
 export const MobileHeaderContainer = styled.div`
-  background-color: #f9f9f9;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   display: flex;
   flex-direction: row;
   justify-content: space-between;

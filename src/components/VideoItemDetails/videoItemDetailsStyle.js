@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const VideoItemDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #f9f9f9;
 `
 
 export const VideoDetailsContainer = styled.div`
@@ -16,13 +15,14 @@ export const SectionsList = styled.div`
   width: 30%;
   height: 100vh;
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 0%;
+    display: none;
   }
 `
 export const VideoDetailsSuccessView = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #f1f1f1;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   padding: 20px;
   width: 100%;
   overflow: auto;
@@ -42,6 +42,7 @@ export const LoadingContainer = styled.div`
 export const VideoDescription = styled.h1`
   font-family: 'Roboto';
   font-size: 18px;
+  color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#000000')};
 `
 export const PublishedOpinionDetailsContainer = styled.div`
   display: flex;
@@ -79,6 +80,10 @@ export const PublishedList = styled.li`
   list-style-type: disc;
 `
 export const Button = styled.button`
+  background-color: transparent;
+  border-width: 0px;
+  cursor: pointer;
+  font-size: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -86,10 +91,6 @@ export const Button = styled.button`
   font-family: 'Roboto';
   font-weight: 400;
   margin: 10px;
-  font-size: 30px
-  background-color: transparent;
-  border-width: 0px;
-  cursor: pointer;
 `
 export const HorizontalLine = styled.hr`
   margin: 2px solid #181818;
@@ -117,7 +118,7 @@ export const ChannelNameSubscribersContainer = styled.div`
   margin-top: 0px;
 `
 export const ChannelName = styled.h1`
-  color: #181818;
+  color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#181818')};
   font-family: 'Roboto';
   font-size: 18px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
@@ -133,7 +134,7 @@ export const ChannelSubscribersCount = styled.p`
   }
 `
 export const ChannelVideoDescription = styled.p`
-  color: #1e293b;
+  color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#1e293b')};
   font-family: 'Roboto';
   font-size: 16px;
   align-self: flex-end;
@@ -145,10 +146,14 @@ export const MobileView = styled.div`
   display: none;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     display: block;
+    width: 100%;
+    height: 100vh;
   }
 `
 export const DesktopView = styled.div`
   display: block;
+  width: 100%;
+  height: 100vh;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     display: none;
   }

@@ -8,6 +8,8 @@ export const TrendingContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   overflow: auto;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
 `
 export const SectionsList = styled.div`
   width: 30%;
@@ -17,7 +19,8 @@ export const SectionsList = styled.div`
   }
 `
 export const TrendingDetailsContainer = styled.div`
-  background-color: #f9f9f9;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -27,7 +30,6 @@ export const TrendingDetailsContainer = styled.div`
   }
 `
 export const LoadingView = styled.div`
-  background-color: #f9f9f9;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -37,7 +39,8 @@ export const LoadingView = styled.div`
 `
 
 export const TrendingHeaderContainer = styled.div`
-  background-color: #ebebeb;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#212121' : '#ebebeb'};
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -49,7 +52,8 @@ export const TrendingHeaderContainer = styled.div`
   }
 `
 export const IconContainer = styled.div`
-  background-color: #d7dfe9;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#d7dfe9'};
   height: 70px;
   width: 70px;
   border-radius: 45px;
@@ -64,7 +68,7 @@ export const IconContainer = styled.div`
   }
 `
 export const TrendingHeader = styled.h1`
-  color: #212121;
+  color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#212121')};
   font-family: 'Roboto';
   font-size: 35px;
   font-weight: 500;
@@ -97,7 +101,7 @@ export const FailureImage = styled.img`
   }
 `
 export const FailureHeading = styled.h1`
-  color: #00306e;
+  color: ${props => (props.color === 'dark' ? '#ffffff' : '#00306e')};
   font-family: 'Roboto';
   font-size: 30px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
@@ -105,7 +109,7 @@ export const FailureHeading = styled.h1`
   }
 `
 export const FailureDescription = styled.p`
-  color: #94a3b8;
+  color: ${props => (props.color === 'dark' ? '#e2e8f0' : '#94a3b8')};
   font-family: 'Roboto';
   font-size: 20px;
   margin-top: 0px;

@@ -5,8 +5,9 @@ import {formatDistanceToNow} from 'date-fns'
 import {BiLike, BiDislike} from 'react-icons/bi'
 import {RiMenuAddLine} from 'react-icons/ri'
 import Loader from 'react-loader-spinner'
-
+import SideBar from '../SideBar'
 import Header from '../Header/index'
+import ActiveMenuThemeSavedVideosContext from '../../Context/ActiveMenuThemeSavedVideosContext'
 import './index.css'
 import {
   VideoItemDetailsContainer,
@@ -46,11 +47,10 @@ const apiConstants = {
 
 class VideoItemDetails extends Component {
   state = {
-    apiCurrentStatus: apiConstants.loading,
+    apiCurrentStatus: apiConstants.initial,
     videoDetails: {},
     isLiked: false,
     isDisliked: false,
-    isSaved: false,
   }
 
   componentDidMount() {
@@ -97,11 +97,23 @@ class VideoItemDetails extends Component {
   }
 
   loadingView = () => (
-    <LoadingContainer>
-      <div className="loader-container" data-testid="loader">
-        <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
-      </div>
-    </LoadingContainer>
+    <ActiveMenuThemeSavedVideosContext.Consumer>
+      {value => {
+        const {isDark} = value
+        return (
+          <LoadingContainer>
+            <div className="loader-container" data-testid="loader">
+              <Loader
+                type="ThreeDots"
+                color={isDark ? '#ffffff' : '#0f0f0f'}
+                height="50"
+                width="50"
+              />
+            </div>
+          </LoadingContainer>
+        )
+      }}
+    </ActiveMenuThemeSavedVideosContext.Consumer>
   )
 
   onClickedLikeButton = () => {
@@ -118,20 +130,14 @@ class VideoItemDetails extends Component {
     }))
   }
 
-  onClickedSaveButton = () => {
-    this.setState(prevState => ({
-      isSaved: !prevState.isSaved,
-    }))
-  }
-
   successView = () => {
-    const {videoDetails, isLiked, isDisliked, isSaved} = this.state
+    const {videoDetails, isLiked, isDisliked} = this.state
     // console.log(videoDetails)
     // console.log(isLiked, isDisliked, isSaved)
     const isLikedActive = isLiked ? 'Active' : 'Not-Active'
     const isDislikedActive = isDisliked ? 'Active' : 'Not-Active'
-    const isSavedActive = isSaved ? 'Active' : 'Not-Active'
     const {
+      id,
       description,
       publishedAt,
       thumbNailUrl,
@@ -145,135 +151,184 @@ class VideoItemDetails extends Component {
     const publishedSplit = publishedAgo.split(' ')
     // console.log(publishedAt)
     const daysAgo = publishedSplit.splice(1, 1).join(' ')
+    const savingVideoDetails = {
+      id,
+      title,
+      thumbNailUrl,
+      channel,
+      viewCount,
+      publishedAt: daysAgo,
+    }
     return (
-      <>
-        <DesktopView>
-          <VideoDetailsSuccessView>
-            <ReactPlayer
-              url={videoUrl}
-              controls
-              width="100%"
-              height="500px"
-              light={<img src={thumbNailUrl} alt="video thumbnail" />}
-              className="react-player-style"
-            />
-            <VideoDescription>{title}</VideoDescription>
-            <PublishedOpinionDetailsContainer>
-              <PublishedOpinionUnOrderLists>
-                <ViewsList>
-                  <PubOpinionDetails>{viewCount} Views</PubOpinionDetails>
-                </ViewsList>
-                <PublishedList>
-                  <PubOpinionDetails>{daysAgo} Years Ago</PubOpinionDetails>
-                </PublishedList>
-              </PublishedOpinionUnOrderLists>
-              <PublishedOpinionUnOrderLists>
-                <li>
-                  <Button
-                    type="button"
-                    theme={isLikedActive}
-                    onClick={this.onClickedLikeButton}
-                  >
-                    <BiLike size={20} /> Like
-                  </Button>
-                </li>
-                <li>
-                  <Button
-                    type="button"
-                    theme={isDislikedActive}
-                    onClick={this.onClickedDislikeButton}
-                  >
-                    <BiDislike size={20} /> Dislike
-                  </Button>
-                </li>
-                <li>
-                  <Button
-                    type="button"
-                    theme={isSavedActive}
-                    onClick={this.onClickedSaveButton}
-                  >
-                    <RiMenuAddLine size={20} /> Save
-                  </Button>
-                </li>
-              </PublishedOpinionUnOrderLists>
-            </PublishedOpinionDetailsContainer>
-            <HorizontalLine as="hr" size="3" width="100%" color="#94a3b8" />
-            <ChannelDetailsContainer>
-              <ChannelImage as="img" src={profileImageUrl} alt="channel logo" />
-              <ChannelNameSubscribersContainer>
-                <ChannelName>{name}</ChannelName>
-                <ChannelSubscribersCount>
-                  {subscriberCount} subscribers
-                </ChannelSubscribersCount>
-              </ChannelNameSubscribersContainer>
-            </ChannelDetailsContainer>
-            <ChannelVideoDescription>{description}</ChannelVideoDescription>
-          </VideoDetailsSuccessView>
-        </DesktopView>
-        <MobileView>
-          <VideoDetailsSuccessView>
-            <ReactPlayer
-              url={videoUrl}
-              controls
-              width="100%"
-              height="230px"
-              light={<img src={thumbNailUrl} alt="video thumbnail" />}
-              className="react-player-style"
-            />
-            <VideoDescription>{title}</VideoDescription>
-            <PublishedOpinionDetailsContainer>
-              <PublishedOpinionUnOrderLists>
-                <ViewsList>
-                  <PubOpinionDetails>{viewCount} Views</PubOpinionDetails>
-                </ViewsList>
-                <PublishedList>
-                  <PubOpinionDetails>{daysAgo} Years Ago</PubOpinionDetails>
-                </PublishedList>
-              </PublishedOpinionUnOrderLists>
-              <PublishedOpinionUnOrderLists>
-                <li>
-                  <Button
-                    type="button"
-                    theme={isLikedActive}
-                    onClick={this.onClickedLikeButton}
-                  >
-                    <BiLike size={20} /> Like
-                  </Button>
-                </li>
-                <li>
-                  <Button
-                    type="button"
-                    theme={isDislikedActive}
-                    onClick={this.onClickedDislikeButton}
-                  >
-                    <BiDislike size={20} /> Dislike
-                  </Button>
-                </li>
-                <li>
-                  <Button
-                    type="button"
-                    theme={isSavedActive}
-                    onClick={this.onClickedSaveButton}
-                  >
-                    <RiMenuAddLine size={20} /> Save
-                  </Button>
-                </li>
-              </PublishedOpinionUnOrderLists>
-            </PublishedOpinionDetailsContainer>
-            <HorizontalLine as="hr" size="3" width="100%" color="#94a3b8" />
-            <ChannelDetailsContainer>
-              <ChannelImage as="img" src={profileImageUrl} alt="channel logo" />
-              <ChannelNameSubscribersContainer>
-                <ChannelName>{name}</ChannelName>
-                <ChannelSubscribersCount>
-                  {subscriberCount} subscribers
-                </ChannelSubscribersCount>
-              </ChannelNameSubscribersContainer>
-            </ChannelDetailsContainer>
-            <ChannelVideoDescription>{description}</ChannelVideoDescription>
-          </VideoDetailsSuccessView>
-        </MobileView>
-      </>
+      <ActiveMenuThemeSavedVideosContext.Consumer>
+        {value => {
+          const {isDark, savedVideosList, clickedSave} = value
+          const bgColor = isDark ? 'dark' : 'light'
+          const isSaved = savedVideosList.find(each => each.id === id)
+          // console.log(isSaved)
+          const isSavedActive = isSaved ? 'Active' : 'Not-Active'
+          const saveButtonText = isSaved ? 'Saved' : 'Save'
+          return (
+            <>
+              <DesktopView>
+                <VideoDetailsSuccessView bgColor={bgColor}>
+                  <ReactPlayer
+                    url={videoUrl}
+                    controls
+                    width="100%"
+                    height="500px"
+                    light={<img src={thumbNailUrl} alt="video thumbnail" />}
+                    className="react-player-style"
+                  />
+                  <VideoDescription bgColor={bgColor}>{title}</VideoDescription>
+                  <PublishedOpinionDetailsContainer>
+                    <PublishedOpinionUnOrderLists>
+                      <ViewsList>
+                        <PubOpinionDetails>{viewCount} Views</PubOpinionDetails>
+                      </ViewsList>
+                      <PublishedList>
+                        <PubOpinionDetails>
+                          {daysAgo} Years Ago
+                        </PubOpinionDetails>
+                      </PublishedList>
+                    </PublishedOpinionUnOrderLists>
+                    <PublishedOpinionUnOrderLists>
+                      <li>
+                        <Button
+                          bgColor={bgColor}
+                          type="button"
+                          theme={isLikedActive}
+                          onClick={this.onClickedLikeButton}
+                        >
+                          <BiLike size={20} /> Like
+                        </Button>
+                      </li>
+                      <li>
+                        <Button
+                          bgColor={bgColor}
+                          type="button"
+                          theme={isDislikedActive}
+                          onClick={this.onClickedDislikeButton}
+                        >
+                          <BiDislike size={20} /> Dislike
+                        </Button>
+                      </li>
+                      <li>
+                        <Button
+                          bgColor={bgColor}
+                          type="button"
+                          theme={isSavedActive}
+                          onClick={() => clickedSave(savingVideoDetails)}
+                        >
+                          <RiMenuAddLine size={20} /> {saveButtonText}
+                        </Button>
+                      </li>
+                    </PublishedOpinionUnOrderLists>
+                  </PublishedOpinionDetailsContainer>
+                  <HorizontalLine
+                    as="hr"
+                    size="3"
+                    width="100%"
+                    color="#94a3b8"
+                  />
+                  <ChannelDetailsContainer>
+                    <ChannelImage
+                      as="img"
+                      src={profileImageUrl}
+                      alt="channel logo"
+                    />
+                    <ChannelNameSubscribersContainer>
+                      <ChannelName bgColor={bgColor}>{name}</ChannelName>
+                      <ChannelSubscribersCount>
+                        {subscriberCount} subscribers
+                      </ChannelSubscribersCount>
+                    </ChannelNameSubscribersContainer>
+                  </ChannelDetailsContainer>
+                  <ChannelVideoDescription bgColor={bgColor}>
+                    {description}
+                  </ChannelVideoDescription>
+                </VideoDetailsSuccessView>
+              </DesktopView>
+              <MobileView>
+                <VideoDetailsSuccessView bgColor={bgColor}>
+                  <ReactPlayer
+                    url={videoUrl}
+                    controls
+                    width="100%"
+                    height="230px"
+                    light={<img src={thumbNailUrl} alt="video thumbnail" />}
+                    className="react-player-style"
+                  />
+                  <VideoDescription bgColor={bgColor}>{title}</VideoDescription>
+                  <PublishedOpinionDetailsContainer>
+                    <PublishedOpinionUnOrderLists>
+                      <ViewsList>
+                        <PubOpinionDetails>{viewCount} Views</PubOpinionDetails>
+                      </ViewsList>
+                      <PublishedList>
+                        <PubOpinionDetails>
+                          {daysAgo} Years Ago
+                        </PubOpinionDetails>
+                      </PublishedList>
+                    </PublishedOpinionUnOrderLists>
+                    <PublishedOpinionUnOrderLists>
+                      <li>
+                        <Button
+                          type="button"
+                          theme={isLikedActive}
+                          onClick={this.onClickedLikeButton}
+                        >
+                          <BiLike size={20} /> Like
+                        </Button>
+                      </li>
+                      <li>
+                        <Button
+                          type="button"
+                          theme={isDislikedActive}
+                          onClick={this.onClickedDislikeButton}
+                        >
+                          <BiDislike size={20} /> Dislike
+                        </Button>
+                      </li>
+                      <li>
+                        <Button
+                          type="button"
+                          theme={isSavedActive}
+                          onClick={this.onClickedSaveButton}
+                        >
+                          <RiMenuAddLine size={20} /> {saveButtonText}
+                        </Button>
+                      </li>
+                    </PublishedOpinionUnOrderLists>
+                  </PublishedOpinionDetailsContainer>
+                  <HorizontalLine
+                    as="hr"
+                    size="3"
+                    width="100%"
+                    color="#94a3b8"
+                  />
+                  <ChannelDetailsContainer>
+                    <ChannelImage
+                      as="img"
+                      src={profileImageUrl}
+                      alt="channel logo"
+                    />
+                    <ChannelNameSubscribersContainer>
+                      <ChannelName bgColor={bgColor}>{name}</ChannelName>
+                      <ChannelSubscribersCount>
+                        {subscriberCount} subscribers
+                      </ChannelSubscribersCount>
+                    </ChannelNameSubscribersContainer>
+                  </ChannelDetailsContainer>
+                  <ChannelVideoDescription bgColor={bgColor}>
+                    {description}
+                  </ChannelVideoDescription>
+                </VideoDetailsSuccessView>
+              </MobileView>
+            </>
+          )
+        }}
+      </ActiveMenuThemeSavedVideosContext.Consumer>
     )
   }
 
@@ -313,7 +368,9 @@ class VideoItemDetails extends Component {
       <VideoItemDetailsContainer>
         <Header />
         <VideoDetailsContainer>
-          <SectionsList>.</SectionsList>
+          <SectionsList>
+            <SideBar />
+          </SectionsList>
           {this.renderView()}
         </VideoDetailsContainer>
       </VideoItemDetailsContainer>

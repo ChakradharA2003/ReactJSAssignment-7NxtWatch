@@ -32,7 +32,7 @@ export const VideoItemDetails = styled.div`
   margin-left: 12px;
 `
 export const Title = styled.h1`
-  color: #212121;
+  color: ${props => (props.color === 'dark' ? '#ffffff' : '#212121')};
   font-family: 'Roboto';
   font-weight: 600;
   font-size: 20px;
@@ -41,7 +41,7 @@ export const Title = styled.h1`
   }
 `
 export const ChannelName = styled.p`
-  color: #64748b;
+  color: ${props => (props.color === 'dark' ? '#e2e8f0' : '#64748b')};
   font-family: 'Roboto';
   font-size: 15px;
   margin-top: 1px;
@@ -59,7 +59,7 @@ export const ViewsAndPublishedDetailsUl = styled.ul`
   margin-left: 0px;
 `
 export const PubAndViews = styled.p`
-  color: #64748b;
+  color: ${props => (props.color === 'dark' ? '#e2e8f0' : '#64748b')};
   font-family: 'Roboto';
   font-size: 12px;
 `
@@ -83,6 +83,7 @@ export const MobileChannelDetails = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  margin-top: 3px;
 `
 export const ChannelImage = styled.img`
   height: 50px;

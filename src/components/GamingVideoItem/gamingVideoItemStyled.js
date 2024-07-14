@@ -21,16 +21,16 @@ export const VideoThumbNail = styled.img`
   }
 `
 export const GamingVideoTitle = styled.h1`
-  color: #475569;
+  color: ${props => (props.color === 'dark' ? '#ffffff' : '#475569')};
   font-family: 'Roboto';
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
 `
 export const GamingVideoViewCount = styled.p`
-  color: #64748b;
+  color: ${props => (props.color === 'dark' ? '#475569' : '#64748b')};
   font-family: 'Roboto';
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 450;
   margin-top: 0px;
 `

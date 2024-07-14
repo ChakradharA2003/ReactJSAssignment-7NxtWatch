@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const SideBarContainer = styled.div`
-  background-color: #f9f9f9;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#000000' : '#f9f9f9'};
   height: 100vh;
   width: 100%;
   display: flex;
@@ -15,7 +16,7 @@ export const SideBarContactDetails = styled.div`
   margin: 8px;
 `
 export const ContactHeading = styled.h1`
-  color: #00306e;
+  color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#00306e')};
   font-size: 25px;
   font-family: 'Roboto';
   font-weight: 600;
@@ -32,7 +33,7 @@ export const LogoImage = styled.img`
   margin: 9px;
 `
 export const ContactDescription = styled.p`
-  color: #383838;
+  color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#383838')};
   font-family: 'Roboto';
   font-size: 20px;
   font-weight: 450;

@@ -9,6 +9,7 @@ import {GoSearch} from 'react-icons/go'
 import Header from '../Header'
 import VideoItem from '../VideoItem'
 import SideBar from '../SideBar'
+import ActiveMenuThemeSavedVideos from '../../Context/ActiveMenuThemeSavedVideosContext'
 import {
   HomeContainer,
   SectionsList,
@@ -30,6 +31,10 @@ import {
   FailureDescription,
   FailureButton,
   LoadingContainer,
+  NoResultsContainer,
+  NoResultsImage,
+  NoResultsHeading,
+  NoResultsDescription,
 } from './homeStyle'
 
 const apiConstants = {
@@ -93,32 +98,78 @@ class Home extends Component {
   }
 
   loadingView = () => (
-    <LoadingContainer>
-      <div className="loader-container" data-testid="loader">
-        <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
-      </div>
-    </LoadingContainer>
+    <ActiveMenuThemeSavedVideos.Consumer>
+      {value => {
+        const {isDark} = value
+        return (
+          <LoadingContainer>
+            <div className="loader-container" data-testid="loader">
+              <Loader
+                type="ThreeDots"
+                color={isDark ? '#ffffff' : '#0f0f0f'}
+                height="50"
+                width="50"
+              />
+            </div>
+          </LoadingContainer>
+        )
+      }}
+    </ActiveMenuThemeSavedVideos.Consumer>
   )
 
   failureView = () => (
-    <FailureContainer>
-      <FailureImage
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="failure view"
-      />
-      <FailureHeading>Oops! Something Went Wrong</FailureHeading>
-      <FailureDescription>
-        We are having some trouble to complete your request.
-      </FailureDescription>
-      <FailureDescription>Please try again.</FailureDescription>
-      <FailureButton type="button" onClick={this.getHomeRouteDetails()}>
-        Retry
-      </FailureButton>
-    </FailureContainer>
+    <ActiveMenuThemeSavedVideos.Consumer>
+      {value => {
+        const {isDark} = value
+        const bgColor = isDark ? 'dark' : 'light'
+        const failureImage = isDark
+          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+        return (
+          <FailureContainer>
+            <FailureImage src={failureImage} alt="failure view" />
+            <FailureHeading>Oops! Something Went Wrong</FailureHeading>
+            <FailureDescription bgColor={bgColor}>
+              We are having some trouble to complete your request.
+            </FailureDescription>
+            <FailureDescription>Please try again.</FailureDescription>
+            <FailureButton type="button" onClick={this.getHomeRouteDetails()}>
+              Retry
+            </FailureButton>
+          </FailureContainer>
+        )
+      }}
+    </ActiveMenuThemeSavedVideos.Consumer>
   )
 
   successView = () => {
     const {videos} = this.state
+    // console.log(videos.length)
+    if (videos.length === 0) {
+      return (
+        <ActiveMenuThemeSavedVideos.Consumer>
+          {value => {
+            const {isDark} = value
+            const bgColor = isDark ? 'dark' : 'light'
+            return (
+              <NoResultsContainer>
+                <NoResultsImage
+                  as="img"
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+                  alt="no videos"
+                />
+                <NoResultsHeading headingColor={bgColor}>
+                  No Search results found
+                </NoResultsHeading>
+                <NoResultsDescription desColor={bgColor}>
+                  Try different key words or remove search filter.
+                </NoResultsDescription>
+              </NoResultsContainer>
+            )
+          }}
+        </ActiveMenuThemeSavedVideos.Consumer>
+      )
+    }
     return (
       <VideosContainer>
         {videos.map(video => (
@@ -159,53 +210,63 @@ class Home extends Component {
   render() {
     const {bannerVisible, searching} = this.state
     return (
-      <>
-        <Header />
-        <HomeContainer>
-          <SectionsList>
-            <SideBar />
-          </SectionsList>
-          <HomeContentContainer>
-            <BannerContainer visible={bannerVisible}>
-              <BannerDetailsContainer>
-                <Banner
-                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                  alt="nxt watch logo"
-                />
-                <BannerDescription>
-                  Buy Nxt Watch Premium prepaid plans with UPI
-                </BannerDescription>
-                <GetButton type="button">GET IT NOW</GetButton>
-              </BannerDetailsContainer>
-              <BannerCloseButton
-                type="button"
-                onClick={this.onClickCloseBanner}
-              >
-                <IoClose size={25} />
-              </BannerCloseButton>
-            </BannerContainer>
+      <ActiveMenuThemeSavedVideos.Consumer>
+        {value => {
+          const {isDark} = value
+          const bgColor = isDark ? 'dark' : 'light'
+          return (
+            <>
+              <Header />
+              <HomeContainer>
+                <SectionsList>
+                  <SideBar />
+                </SectionsList>
+                <HomeContentContainer>
+                  <BannerContainer visible={bannerVisible}>
+                    <BannerDetailsContainer>
+                      <Banner
+                        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+                        alt="nxt watch logo"
+                      />
+                      <BannerDescription>
+                        Buy Nxt Watch Premium prepaid plans with UPI
+                      </BannerDescription>
+                      <GetButton type="button">GET IT NOW</GetButton>
+                    </BannerDetailsContainer>
+                    <BannerCloseButton
+                      type="button"
+                      onClick={this.onClickCloseBanner}
+                    >
+                      <IoClose size={25} />
+                    </BannerCloseButton>
+                  </BannerContainer>
 
-            <SearchVideosContainer>
-              <SearchBarContainer>
-                <SearchInput
-                  type="search"
-                  placeholder="Search"
-                  value={searching}
-                  onChange={this.onChangeSearchInput}
-                />
-                <SearchButton
-                  as="button"
-                  type="button"
-                  onClick={this.onSearchVideo}
-                >
-                  <GoSearch size={18} />
-                </SearchButton>
-              </SearchBarContainer>
-              {this.renderView()}
-            </SearchVideosContainer>
-          </HomeContentContainer>
-        </HomeContainer>
-      </>
+                  <SearchVideosContainer bgColor={bgColor}>
+                    <SearchBarContainer>
+                      <SearchInput
+                        searchBgColor={bgColor}
+                        type="search"
+                        placeholder="Search"
+                        value={searching}
+                        onChange={this.onChangeSearchInput}
+                      />
+                      <SearchButton
+                        searchButColor={bgColor}
+                        as="button"
+                        type="button"
+                        onClick={this.onSearchVideo}
+                      >
+                        <GoSearch size={18} />
+                      </SearchButton>
+                    </SearchBarContainer>
+                    {this.renderView()}
+                  </SearchVideosContainer>
+                </HomeContentContainer>
+              </HomeContainer>
+            </>
+          )
+        }}
+      </ActiveMenuThemeSavedVideos.Consumer>
     )
   }
 }

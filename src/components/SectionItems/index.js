@@ -1,4 +1,3 @@
-import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {AiFillHome, AiFillFire} from 'react-icons/ai'
 import {SiYoutubegaming} from 'react-icons/si'
@@ -9,7 +8,10 @@ import {
   LinkName,
   Button,
 } from './sectionItemStyled'
+
 import './index.css'
+
+import ActiveMenuThemeSavedVideos from '../../Context/ActiveMenuThemeSavedVideosContext'
 
 const sectionConstants = {
   home: 'HOME',
@@ -18,143 +20,149 @@ const sectionConstants = {
   savedVideos: 'SAVED VIDEOS',
 }
 
-class SectionItems extends Component {
-  state = {
-    activeSection: sectionConstants.home,
-  }
-
-  onClickedHome = () => {
-    this.setState({activeSection: sectionConstants.home})
-  }
-
-  onClickedTrending = () => {
-    console.log(sectionConstants.trending)
-    this.setState({activeSection: sectionConstants.trending})
-  }
-
-  onClickedGaming = () => {
-    this.setState({activeSection: sectionConstants.gaming})
-  }
-
-  onClickedSavedVideos = () => {
-    this.setState({activeSection: sectionConstants.savedVideos})
-  }
-
-  render() {
-    const {activeSection} = this.state
-    console.log(activeSection)
-    return (
-      <SectionItemsContainer>
-        <Link to="/" className="link-item">
-          <Button type="button" onClick={this.onClickedHome}>
-            <LinkItem
-              bgColor={
-                activeSection === sectionConstants.home ? 'Active' : 'Inactive'
-              }
+const SectionItems = () => (
+  <ActiveMenuThemeSavedVideos.Consumer>
+    {value => {
+      const {activeMenu, changeActiveMenu, isDark} = value
+      const activeSection = activeMenu
+      const linkItemBgColor = isDark ? 'dark' : 'light'
+      const nonActiveLinkIconColor =
+        linkItemBgColor === 'dark' ? '#ffffff' : '#475569'
+      return (
+        <SectionItemsContainer>
+          <Link to="/" className="link-item">
+            <Button
+              type="button"
+              onClick={() => changeActiveMenu(sectionConstants.home)}
             >
-              <AiFillHome
-                color={
+              <LinkItem
+                bgColor={
                   activeSection === sectionConstants.home
-                    ? '#ff0000'
-                    : '#475569'
+                    ? 'Active'
+                    : 'Inactive'
                 }
-                size={20}
-              />
-              <LinkName
-                fontWeight={
-                  activeSection === sectionConstants.home ? 'High' : 'Low'
-                }
+                linkItemBgColor={linkItemBgColor}
               >
-                Home
-              </LinkName>
-            </LinkItem>
-          </Button>
-        </Link>
-        <Link to="/trending" className="link-item">
-          <Button type="button" onClick={this.onClickedTrending}>
-            <LinkItem
-              bgColor={
-                activeSection === sectionConstants.trending
-                  ? 'Active'
-                  : 'Inactive'
-              }
+                <AiFillHome
+                  color={
+                    activeSection === sectionConstants.home
+                      ? '#ff0000'
+                      : nonActiveLinkIconColor
+                  }
+                  size={20}
+                />
+                <LinkName
+                  fontWeight={
+                    activeSection === sectionConstants.home ? 'High' : 'Low'
+                  }
+                  linkItemBgColor={linkItemBgColor}
+                >
+                  Home
+                </LinkName>
+              </LinkItem>
+            </Button>
+          </Link>
+          <Link to="/trending" className="link-item">
+            <Button
+              type="button"
+              onClick={() => changeActiveMenu(sectionConstants.trending)}
             >
-              <AiFillFire
-                color={
+              <LinkItem
+                bgColor={
                   activeSection === sectionConstants.trending
-                    ? '#ff0000'
-                    : '#475569'
+                    ? 'Active'
+                    : 'Inactive'
                 }
-                size={20}
-              />
-              <LinkName
-                fontWeight={
-                  activeSection === sectionConstants.trending ? 'High' : 'Low'
-                }
+                linkItemBgColor={linkItemBgColor}
               >
-                Trending
-              </LinkName>
-            </LinkItem>
-          </Button>
-        </Link>
-        <Link to="/gaming" className="link-item">
-          <Button type="button" onClick={this.onClickedGaming}>
-            <LinkItem
-              bgColor={
-                activeSection === sectionConstants.gaming
-                  ? 'Active'
-                  : 'Inactive'
-              }
+                <AiFillFire
+                  color={
+                    activeSection === sectionConstants.trending
+                      ? '#ff0000'
+                      : nonActiveLinkIconColor
+                  }
+                  size={20}
+                />
+                <LinkName
+                  fontWeight={
+                    activeSection === sectionConstants.trending ? 'High' : 'Low'
+                  }
+                  linkItemBgColor={linkItemBgColor}
+                >
+                  Trending
+                </LinkName>
+              </LinkItem>
+            </Button>
+          </Link>
+          <Link to="/gaming" className="link-item">
+            <Button
+              type="button"
+              onClick={() => changeActiveMenu(sectionConstants.gaming)}
             >
-              <SiYoutubegaming
-                color={
+              <LinkItem
+                bgColor={
                   activeSection === sectionConstants.gaming
-                    ? '#ff0000'
-                    : '#475569'
+                    ? 'Active'
+                    : 'Inactive'
                 }
-                size={20}
-              />
-              <LinkName
-                fontWeight={
-                  activeSection === sectionConstants.gaming ? 'High' : 'Low'
-                }
+                linkItemBgColor={linkItemBgColor}
               >
-                Gaming
-              </LinkName>
-            </LinkItem>
-          </Button>
-        </Link>
-        <Link to="/saved-videos" className="link-item">
-          <Button type="button" onClick={this.onClickedSavedVideos}>
-            <LinkItem
-              bgColor={
-                activeSection === sectionConstants.savedVideos
-                  ? 'Active'
-                  : 'Inactive'
-              }
+                <SiYoutubegaming
+                  color={
+                    activeSection === sectionConstants.gaming
+                      ? '#ff0000'
+                      : nonActiveLinkIconColor
+                  }
+                  size={20}
+                />
+                <LinkName
+                  fontWeight={
+                    activeSection === sectionConstants.gaming ? 'High' : 'Low'
+                  }
+                  linkItemBgColor={linkItemBgColor}
+                >
+                  Gaming
+                </LinkName>
+              </LinkItem>
+            </Button>
+          </Link>
+          <Link to="/saved-videos" className="link-item">
+            <Button
+              type="button"
+              onClick={() => changeActiveMenu(sectionConstants.savedVideos)}
             >
-              <RiMenuAddLine
-                color={
+              <LinkItem
+                bgColor={
                   activeSection === sectionConstants.savedVideos
-                    ? '#ff0000'
-                    : '#475569'
+                    ? 'Active'
+                    : 'Inactive'
                 }
-                size={20}
-              />
-              <LinkName
-                fontWeight={
-                  activeSection === sectionConstants.savedVideos
-                    ? 'High'
-                    : 'Low'
-                }
+                linkItemBgColor={linkItemBgColor}
               >
-                Saved Videos
-              </LinkName>
-            </LinkItem>
-          </Button>
-        </Link>
-      </SectionItemsContainer>
-    )
-  }
-}
+                <RiMenuAddLine
+                  color={
+                    activeSection === sectionConstants.savedVideos
+                      ? '#ff0000'
+                      : nonActiveLinkIconColor
+                  }
+                  size={20}
+                />
+                <LinkName
+                  fontWeight={
+                    activeSection === sectionConstants.savedVideos
+                      ? 'High'
+                      : 'Low'
+                  }
+                  linkItemBgColor={linkItemBgColor}
+                >
+                  Saved Videos
+                </LinkName>
+              </LinkItem>
+            </Button>
+          </Link>
+        </SectionItemsContainer>
+      )
+    }}
+  </ActiveMenuThemeSavedVideos.Consumer>
+)
 export default SectionItems

@@ -5,6 +5,7 @@ import {SiYoutubegaming} from 'react-icons/si'
 import Header from '../Header/index'
 import SideBar from '../SideBar'
 import GamingVideoItem from '../GamingVideoItem'
+import ActiveMenuThemeSavedVideosContext from '../../Context/ActiveMenuThemeSavedVideosContext'
 import {
   MainContainer,
   SectionsList,
@@ -73,28 +74,52 @@ class Gaming extends Component {
   }
 
   loadingView = () => (
-    <LoadingView>
-      <div className="loader-container" data-testid="loader">
-        <Loader type="ThreeDots" color="#000000" height="50" width="50" />
-      </div>
-    </LoadingView>
+    <ActiveMenuThemeSavedVideosContext.Consumer>
+      {value => {
+        const {isDark} = value
+        return (
+          <LoadingView>
+            <div className="loader-container" data-testid="loader">
+              <Loader
+                type="ThreeDots"
+                color={isDark ? '#ffffff' : '#0f0f0f'}
+                height="50"
+                width="50"
+              />
+            </div>
+          </LoadingView>
+        )
+      }}
+    </ActiveMenuThemeSavedVideosContext.Consumer>
   )
 
   failureView = () => (
-    <FailureContainer>
-      <FailureImage
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="failure view"
-      />
-      <FailureHeading>Oops! Something Went Wrong</FailureHeading>
-      <FailureDescription>
-        We are having some trouble to complete your request.
-      </FailureDescription>
-      <FailureDescription>Please try again.</FailureDescription>
-      <FailureButton type="button" onClick={this.getHomeRouteDetails()}>
-        Retry
-      </FailureButton>
-    </FailureContainer>
+    <ActiveMenuThemeSavedVideosContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const color = isDark ? 'dark' : 'light'
+        return (
+          <FailureContainer>
+            <FailureImage
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+              alt="failure view"
+            />
+            <FailureHeading color={color}>
+              Oops! Something Went Wrong
+            </FailureHeading>
+            <FailureDescription color={color}>
+              We are having some trouble to complete your request.
+            </FailureDescription>
+            <FailureDescription color={color}>
+              Please try again.
+            </FailureDescription>
+            <FailureButton type="button" onClick={this.getHomeRouteDetails()}>
+              Retry
+            </FailureButton>
+          </FailureContainer>
+        )
+      }}
+    </ActiveMenuThemeSavedVideosContext.Consumer>
   )
 
   successView = () => {
@@ -124,23 +149,31 @@ class Gaming extends Component {
 
   render() {
     return (
-      <>
-        <Header />
-        <MainContainer>
-          <SectionsList>
-            <SideBar />
-          </SectionsList>
-          <GamingVideosContainer>
-            <GamingHeaderContainer>
-              <IconContainer>
-                <SiYoutubegaming size={40} color="#ff0b37" />
-              </IconContainer>
-              <GamingHeader>Gaming</GamingHeader>
-            </GamingHeaderContainer>
-            {this.renderView()}
-          </GamingVideosContainer>
-        </MainContainer>
-      </>
+      <ActiveMenuThemeSavedVideosContext.Consumer>
+        {value => {
+          const {isDark} = value
+          const bgColor = isDark ? 'dark' : 'light'
+          return (
+            <>
+              <Header />
+              <MainContainer>
+                <SectionsList>
+                  <SideBar />
+                </SectionsList>
+                <GamingVideosContainer bgColor={bgColor}>
+                  <GamingHeaderContainer bgColor={bgColor}>
+                    <IconContainer bgColor={bgColor}>
+                      <SiYoutubegaming size={40} color="#ff0b37" />
+                    </IconContainer>
+                    <GamingHeader bgColor={bgColor}>Gaming</GamingHeader>
+                  </GamingHeaderContainer>
+                  {this.renderView()}
+                </GamingVideosContainer>
+              </MainContainer>
+            </>
+          )
+        }}
+      </ActiveMenuThemeSavedVideosContext.Consumer>
     )
   }
 }

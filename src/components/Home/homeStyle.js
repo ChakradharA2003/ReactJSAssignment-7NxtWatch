@@ -16,8 +16,9 @@ export const HomeContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
+  height: 100vh;
   overflow: auto;
-  padding: 20px 10px 20px;
+  padding: 0px 0px 20px;
   margin: 0px;
 `
 export const BannerContainer = styled.div`
@@ -70,17 +71,28 @@ export const SearchBarContainer = styled.div`
   flex-direction: row;
   align-items: center;
   height: 40px;
+  margin-left: 40px;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    margin-left: 15px;
+  }
 `
 export const SearchInput = styled.input`
   width: 330px;
   padding: 8px;
   margin-top: 10px;
   outline: none;
+  border-color: ${props =>
+    props.searchBgColor === 'dark' ? '#909090' : '#0f0f0f'}
+  background-color: ${props =>
+    props.searchBgColor === 'dark' ? '#0f0f0f' : '#ffffff'};
+  color: ${props => (props.searchBgColor === 'dark' ? '#ffffff' : '#0f0f0f')};
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 70%;
   }
 `
 export const SearchButton = styled.button`
+  background-color: ${props =>
+    props.searchButColor === 'dark' ? '#909090' : '#cccccc'}
   padding: 7px;
   margin-top: 10px;
   height: 36px;
@@ -90,7 +102,8 @@ export const SearchButton = styled.button`
   cursor: pointer;
 `
 export const SearchVideosContainer = styled.div`
-  background-color: #ebebeb;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#ebebeb'};
   display: flex;
   flex-direction: column;
   // align-items: flex-start;
@@ -125,7 +138,7 @@ export const FailureImage = styled.img`
   }
 `
 export const FailureHeading = styled.h1`
-  color: #00306e;
+  color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#00306e')};
   font-family: 'Roboto';
   font-size: 30px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
@@ -133,7 +146,7 @@ export const FailureHeading = styled.h1`
   }
 `
 export const FailureDescription = styled.p`
-  color: #94a3b8;
+  color: ${props => (props.bgColor === 'dark' ? '#e2e8f0' : '#94a3b8')};
   font-family: 'Roboto';
   font-size: 20px;
   margin-top: 0px;
@@ -155,4 +168,30 @@ export const LoadingContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+export const NoResultsContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+export const NoResultsImage = styled.img`
+  height: 500px;
+  width: 500px;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    height: 300px;
+    width: 300px;
+  }
+`
+
+export const NoResultsHeading = styled.h1`
+  color: ${props => (props.headingColor === 'dark' ? '#f8fafc' : '#00306e')};
+  text-align: center;
+`
+export const NoResultsDescription = styled.p`
+  color: ${props => (props.desColor === 'dark' ? '#e2e8f0' : '#94a3b8')};
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
 `

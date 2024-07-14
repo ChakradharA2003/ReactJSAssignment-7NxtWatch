@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner'
 import Header from '../Header/index'
 import SideBar from '../SideBar'
 import TrendingVideoItem from '../TrendingVideoItem/index'
+import ActiveMenuThemeSavedVideosContext from '../../Context/ActiveMenuThemeSavedVideosContext'
 import {
   MainContainer,
   TrendingContentContainer,
@@ -77,16 +78,28 @@ class Trending extends Component {
   }
 
   loadingView = () => (
-    <LoadingView>
-      <div className="loader-container" data-testid="loader">
-        <Loader type="ThreeDots" color="#000000" height="50" width="50" />
-      </div>
-    </LoadingView>
+    <ActiveMenuThemeSavedVideosContext.Consumer>
+      {value => {
+        const {isDark} = value
+        return (
+          <LoadingView>
+            <div className="loader-container" data-testid="loader">
+              <Loader
+                type="ThreeDots"
+                color={isDark ? '#ffffff' : '#0f0f0f'}
+                height="50"
+                width="50"
+              />
+            </div>
+          </LoadingView>
+        )
+      }}
+    </ActiveMenuThemeSavedVideosContext.Consumer>
   )
 
   successView = () => {
     const {trendingVideos} = this.state
-    console.log(trendingVideos)
+    // console.log(trendingVideos)
     return (
       <TrendingVideosUnOrderList>
         {trendingVideos.map(video => (
@@ -97,20 +110,32 @@ class Trending extends Component {
   }
 
   failureView = () => (
-    <FailureContainer>
-      <FailureImage
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="failure view"
-      />
-      <FailureHeading>Oops! Something Went Wrong</FailureHeading>
-      <FailureDescription>
-        We are having some trouble to complete your request.
-      </FailureDescription>
-      <FailureDescription>Please try again.</FailureDescription>
-      <FailureButton type="button" onClick={this.getHomeRouteDetails()}>
-        Retry
-      </FailureButton>
-    </FailureContainer>
+    <ActiveMenuThemeSavedVideosContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const color = isDark ? 'dark' : 'light'
+        const failureImage = isDark
+          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+        return (
+          <FailureContainer>
+            <FailureImage src={failureImage} alt="failure view" />
+            <FailureHeading color={color}>
+              Oops! Something Went Wrong
+            </FailureHeading>
+            <FailureDescription color={color}>
+              We are having some trouble to complete your request.
+            </FailureDescription>
+            <FailureDescription color={color}>
+              Please try again.
+            </FailureDescription>
+            <FailureButton type="button" onClick={this.getHomeRouteDetails()}>
+              Retry
+            </FailureButton>
+          </FailureContainer>
+        )
+      }}
+    </ActiveMenuThemeSavedVideosContext.Consumer>
   )
 
   renderView = () => {
@@ -129,25 +154,35 @@ class Trending extends Component {
 
   render() {
     return (
-      <>
-        <MainContainer>
-          <Header />
-          <TrendingContentContainer>
-            <SectionsList>
-              <SideBar />
-            </SectionsList>
-            <TrendingDetailsContainer>
-              <TrendingHeaderContainer>
-                <IconContainer>
-                  <AiFillFire color="#ff0b37" size={40} />
-                </IconContainer>
-                <TrendingHeader>Trending</TrendingHeader>
-              </TrendingHeaderContainer>
-              {this.renderView()}
-            </TrendingDetailsContainer>
-          </TrendingContentContainer>
-        </MainContainer>
-      </>
+      <ActiveMenuThemeSavedVideosContext.Consumer>
+        {value => {
+          const {isDark} = value
+          const bgColor = isDark ? 'dark' : 'light'
+          return (
+            <>
+              <MainContainer>
+                <Header />
+                <TrendingContentContainer bgColor={bgColor}>
+                  <SectionsList>
+                    <SideBar />
+                  </SectionsList>
+                  <TrendingDetailsContainer bgColor={bgColor}>
+                    <TrendingHeaderContainer bgColor={bgColor}>
+                      <IconContainer bgColor={bgColor}>
+                        <AiFillFire color="#ff0b37" size={40} />
+                      </IconContainer>
+                      <TrendingHeader bgColor={bgColor}>
+                        Trending
+                      </TrendingHeader>
+                    </TrendingHeaderContainer>
+                    {this.renderView()}
+                  </TrendingDetailsContainer>
+                </TrendingContentContainer>
+              </MainContainer>
+            </>
+          )
+        }}
+      </ActiveMenuThemeSavedVideosContext.Consumer>
     )
   }
 }

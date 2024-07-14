@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import {formatDistanceToNow} from 'date-fns'
-
+import ActiveMenuThemeSavedVideosContext from '../../Context/ActiveMenuThemeSavedVideosContext'
 import {
   VideoItemList,
   ThumbNailImage,
@@ -28,51 +28,77 @@ const TrendingVideoItem = props => {
   const daysAgo = publishedSplit.splice(1, 1).join(' ')
   // console.log(daysAgo, viewCount)
   return (
-    <>
-      <DesktopView>
-        <Link to={`/videos/${id}`} className="link-item">
-          <VideoItemList>
-            <ThumbNailImage as="img" src={thumbNailUrl} alt="video thumbnail" />
-            <VideoItemDetails>
-              <Title>{title}</Title>
-              <ChannelName>{name}</ChannelName>
-              <ViewsAndPublishedDetailsUl>
-                <li>
-                  <PubAndViews>{viewCount} Views</PubAndViews>
-                </li>
-                <PublishedList>
-                  <PubAndViews>{daysAgo} Years</PubAndViews>
-                </PublishedList>
-              </ViewsAndPublishedDetailsUl>
-            </VideoItemDetails>
-          </VideoItemList>
-        </Link>
-      </DesktopView>
-      <MobileView>
-        <Link to={`/videos/${id}`} className="link-item">
-          <VideoItemList>
-            <ThumbNailImage as="img" src={thumbNailUrl} alt="video thumbnail" />
-            <MobileChannelDetails>
-              <ChannelImage as="img" src={profileImageUrl} alt="channel logo" />
-              <VideoItemDetails>
-                <Title>{title}</Title>
-                <MobileViewVideoDetails>
-                  <MobileNameList>
-                    <ChannelName>{name}</ChannelName>
-                  </MobileNameList>
-                  <li>
-                    <ChannelName>{viewCount} Views</ChannelName>
-                  </li>
-                  <li>
-                    <ChannelName>{daysAgo} Years</ChannelName>
-                  </li>
-                </MobileViewVideoDetails>
-              </VideoItemDetails>
-            </MobileChannelDetails>
-          </VideoItemList>
-        </Link>
-      </MobileView>
-    </>
+    <ActiveMenuThemeSavedVideosContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const color = isDark ? 'dark' : 'light'
+        return (
+          <>
+            <DesktopView>
+              <Link to={`/videos/${id}`} className="link-item">
+                <VideoItemList>
+                  <ThumbNailImage
+                    as="img"
+                    src={thumbNailUrl}
+                    alt="video thumbnail"
+                  />
+                  <VideoItemDetails>
+                    <Title color={color}>{title}</Title>
+                    <ChannelName color={color}>{name}</ChannelName>
+                    <ViewsAndPublishedDetailsUl>
+                      <li>
+                        <PubAndViews color={color}>
+                          {viewCount} Views
+                        </PubAndViews>
+                      </li>
+                      <PublishedList>
+                        <PubAndViews color={color}>{daysAgo} Years</PubAndViews>
+                      </PublishedList>
+                    </ViewsAndPublishedDetailsUl>
+                  </VideoItemDetails>
+                </VideoItemList>
+              </Link>
+            </DesktopView>
+            <MobileView>
+              <Link to={`/videos/${id}`} className="link-item">
+                <VideoItemList>
+                  <ThumbNailImage
+                    as="img"
+                    src={thumbNailUrl}
+                    alt="video thumbnail"
+                  />
+                  <MobileChannelDetails>
+                    <ChannelImage
+                      as="img"
+                      src={profileImageUrl}
+                      alt="channel logo"
+                    />
+                    <VideoItemDetails>
+                      <Title color={color}>{title}</Title>
+                      <MobileViewVideoDetails>
+                        <MobileNameList>
+                          <ChannelName color={color}>{name}</ChannelName>
+                        </MobileNameList>
+                        <li>
+                          <ChannelName color={color}>
+                            {viewCount} Views
+                          </ChannelName>
+                        </li>
+                        <li>
+                          <ChannelName color={color}>
+                            {daysAgo} Years
+                          </ChannelName>
+                        </li>
+                      </MobileViewVideoDetails>
+                    </VideoItemDetails>
+                  </MobileChannelDetails>
+                </VideoItemList>
+              </Link>
+            </MobileView>
+          </>
+        )
+      }}
+    </ActiveMenuThemeSavedVideosContext.Consumer>
   )
 }
 export default TrendingVideoItem

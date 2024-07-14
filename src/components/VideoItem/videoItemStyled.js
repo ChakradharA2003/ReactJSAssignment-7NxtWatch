@@ -36,7 +36,7 @@ export const VideoDescriptionContainer = styled.div`
   margin: 0px 10px 0px;
 `
 export const VideoTitle = styled.h1`
-  color: #231f20;
+  color: ${props => (props.color === 'dark' ? '#f8fafc' : '#231f20')};
   font-family: 'Roboto';
   font-size: 14px;
 `
