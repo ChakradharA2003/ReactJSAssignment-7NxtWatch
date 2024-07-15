@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const MainContainer = styled.div`
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   display: flex;
   flex-direction: column;
 `
@@ -8,8 +10,6 @@ export const TrendingContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   overflow: auto;
-  background-color: ${props =>
-    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
 `
 export const SectionsList = styled.div`
   width: 30%;
@@ -83,6 +83,9 @@ export const TrendingVideosUnOrderList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    padding: 5px;
+  }
 `
 export const FailureContainer = styled.div`
   height: 100vh;

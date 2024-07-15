@@ -61,6 +61,7 @@ class VideoItemDetails extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
+    // console.log(id)
     const videoItemDetailsApiUrl = `https://apis.ccbp.in/videos/${id}`
     const jwtToken = Cookies.get('jwt_token')
     const options = {
@@ -164,10 +165,10 @@ class VideoItemDetails extends Component {
         {value => {
           const {isDark, savedVideosList, clickedSave} = value
           const bgColor = isDark ? 'dark' : 'light'
-          const isSaved = savedVideosList.find(each => each.id === id)
-          // console.log(isSaved)
-          const isSavedActive = isSaved ? 'Active' : 'Not-Active'
-          const saveButtonText = isSaved ? 'Saved' : 'Save'
+          const isSaved = savedVideosList.find(video => video.id === id)
+          // const isSaved = true
+          const isSavedActive = isSaved !== undefined ? 'Active' : 'Not-Active'
+          const saveButtonText = isSaved !== undefined ? 'Saved' : 'Save'
           return (
             <>
               <DesktopView>
@@ -365,15 +366,26 @@ class VideoItemDetails extends Component {
 
   render() {
     return (
-      <VideoItemDetailsContainer>
-        <Header />
-        <VideoDetailsContainer>
-          <SectionsList>
-            <SideBar />
-          </SectionsList>
-          {this.renderView()}
-        </VideoDetailsContainer>
-      </VideoItemDetailsContainer>
+      <ActiveMenuThemeSavedVideosContext.Consumer>
+        {value => {
+          const {isDark} = value
+          const bgColor = isDark ? 'dark' : 'light'
+          return (
+            <VideoItemDetailsContainer
+              data-testid="videoItemDetails"
+              bgColor={bgColor}
+            >
+              <Header />
+              <VideoDetailsContainer>
+                <SectionsList>
+                  <SideBar />
+                </SectionsList>
+                {this.renderView()}
+              </VideoDetailsContainer>
+            </VideoItemDetailsContainer>
+          )
+        }}
+      </ActiveMenuThemeSavedVideosContext.Consumer>
     )
   }
 }

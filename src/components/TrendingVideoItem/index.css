@@ -1,3 +1,9 @@
 .link-item {
   text-decoration: none;
 }
+.list-style-color {
+  list-style-type: disc;
+}
+.list-style-color::marker {
+  color: black;
+}

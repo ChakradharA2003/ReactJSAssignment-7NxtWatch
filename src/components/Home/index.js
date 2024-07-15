@@ -217,12 +217,12 @@ class Home extends Component {
           return (
             <>
               <Header />
-              <HomeContainer>
+              <HomeContainer data-testid="home" bgColor={bgColor}>
                 <SectionsList>
                   <SideBar />
                 </SectionsList>
                 <HomeContentContainer>
-                  <BannerContainer visible={bannerVisible}>
+                  <BannerContainer visible={bannerVisible} data-testid="banner">
                     <BannerDetailsContainer>
                       <Banner
                         src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
@@ -241,7 +241,7 @@ class Home extends Component {
                     </BannerCloseButton>
                   </BannerContainer>
 
-                  <SearchVideosContainer bgColor={bgColor}>
+                  <SearchVideosContainer>
                     <SearchBarContainer>
                       <SearchInput
                         searchBgColor={bgColor}
@@ -251,6 +251,7 @@ class Home extends Component {
                         onChange={this.onChangeSearchInput}
                       />
                       <SearchButton
+                        data-testid="searchButton"
                         searchButColor={bgColor}
                         as="button"
                         type="button"

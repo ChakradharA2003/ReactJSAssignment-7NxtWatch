@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const VideoItemDetailsContainer = styled.div`
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   display: flex;
   flex-direction: column;
 `
@@ -52,6 +54,7 @@ export const PublishedOpinionDetailsContainer = styled.div`
   width: 100%;
   margin-left: 0px;
   margin-top: 0px;
+  padding: 0px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     display: flex;
     justify-content: flex-start;
@@ -67,6 +70,7 @@ export const PublishedOpinionUnOrderLists = styled.ul`
   justify-content: space-around
   align-items: center;
   margin: 0px;
+  padding: 0px;
 `
 export const PubOpinionDetails = styled.p`
   color: #64748b;

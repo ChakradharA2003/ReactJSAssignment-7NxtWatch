@@ -48,21 +48,29 @@ export const ChannelName = styled.p`
   margin-top: 2px;
   margin-bottom: 0px;
 `
-export const ViewsPublishContainer = styled.div`
+export const ViewsPublishContainer = styled.ul`
   display: flex;
   flex-direction: row;
-  // justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 0px;
+  width: 140px;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
 `
+export const listWithDisc = styled.li`
+  list-style-type: disc;
+  margin-left: 14px;
+`
+
 export const ViewCount = styled.p`
   color: #616e7c;
-  font-size: 10px;
+  font-size: 12px;
   font-family: 'Roboto';
   margin: 3px;
 `
 export const YearsAgo = styled.p`
   color: #616e7c;
-  font-size: 10px;
+  font-size: 12px;
   font-family: 'Roboto';
 `

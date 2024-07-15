@@ -160,9 +160,9 @@ class Trending extends Component {
           const bgColor = isDark ? 'dark' : 'light'
           return (
             <>
-              <MainContainer>
+              <MainContainer data-testid="trending" bgColor={bgColor}>
                 <Header />
-                <TrendingContentContainer bgColor={bgColor}>
+                <TrendingContentContainer>
                   <SectionsList>
                     <SideBar />
                   </SectionsList>

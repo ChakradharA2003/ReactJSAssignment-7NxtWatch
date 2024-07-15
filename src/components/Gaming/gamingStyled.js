@@ -12,13 +12,18 @@ export const SectionsList = styled.div`
     width: 0%;
   }
 `
+export const GamingContainer = styled.div`
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
+  display: flex;
+  flex-direction: column;
+`
+
 export const GamingVideosContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  background-color: ${props =>
-    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   width: 70%;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;

@@ -1,10 +1,12 @@
 import {withRouter, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import {FaMoon} from 'react-icons/fa'
+import {IoMdClose} from 'react-icons/io'
+import {GiHamburgerMenu} from 'react-icons/gi'
 import {FiLogOut, FiSun} from 'react-icons/fi'
-
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
+import SectionItems from '../SectionItems'
 import ActiveMenuThemeSavedVideos from '../../Context/ActiveMenuThemeSavedVideosContext'
 import {
   DesktopHeaderContainer,
@@ -21,6 +23,9 @@ import {
   PopUpButtonsContainer,
   CancelButton,
   ConfirmButton,
+  SectionsListPopUpContainer,
+  SectionsPopupCloseButton,
+  DisplaySectionsButton,
 } from './headerStyled'
 
 const Header = props => (
@@ -53,7 +58,11 @@ const Header = props => (
               <WebsiteLogo src={websiteLogo} alt="website logo" />
             </Link>
             <HeaderOptionsContainer>
-              <Buttons type="button" onClick={() => changeTheme()}>
+              <Buttons
+                data-testid="theme"
+                type="button"
+                onClick={() => changeTheme()}
+              >
                 {changeThemeIconDesktop}
               </Buttons>
               <Buttons type="button">
@@ -67,8 +76,8 @@ const Header = props => (
                 trigger={<LogoutButton type="button">Logout</LogoutButton>}
               >
                 {close => (
-                  <LogoutPopUpContainer>
-                    <PopUpQuestion>
+                  <LogoutPopUpContainer bgColor={bgColor}>
+                    <PopUpQuestion bgColor={bgColor}>
                       Are you sure you want to logout?
                     </PopUpQuestion>
                     <PopUpButtonsContainer>
@@ -89,10 +98,39 @@ const Header = props => (
               <MobileWebsiteLogo src={websiteLogo} alt="website logo" />
             </Link>
             <MobileHeaderOptionsContainer>
-              <Buttons type="button" onClick={() => changeTheme()}>
+              <Buttons
+                data-testid="theme"
+                type="button"
+                onClick={() => changeTheme()}
+              >
                 {changeThemeIconMobile}
               </Buttons>
-
+              <Popup
+                modal
+                trigger={
+                  <DisplaySectionsButton type="button">
+                    <GiHamburgerMenu
+                      size={20}
+                      color={isDark ? '#f9f9f9' : '#0f0f0f'}
+                    />
+                  </DisplaySectionsButton>
+                }
+              >
+                {close => (
+                  <SectionsListPopUpContainer bgColor={bgColor}>
+                    <SectionsPopupCloseButton
+                      type="button"
+                      onClick={() => close()}
+                    >
+                      <IoMdClose
+                        size={20}
+                        color={isDark ? '#f9f9f9' : '#0f0f0f'}
+                      />
+                    </SectionsPopupCloseButton>
+                    <SectionItems />
+                  </SectionsListPopUpContainer>
+                )}
+              </Popup>
               <Popup
                 modal
                 trigger={
@@ -100,8 +138,8 @@ const Header = props => (
                 }
               >
                 {close => (
-                  <LogoutPopUpContainer>
-                    <PopUpQuestion>
+                  <LogoutPopUpContainer bgColor={bgColor}>
+                    <PopUpQuestion bgColor={bgColor}>
                       Are you sure you want to logout?
                     </PopUpQuestion>
                     <PopUpButtonsContainer>

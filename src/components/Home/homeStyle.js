@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const HomeContainer = styled.div`
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#181818' : '#f9f9f9'};
   display: flex;
   flex-direction: row;
   margin-top: 0px;
@@ -77,14 +79,14 @@ export const SearchBarContainer = styled.div`
   }
 `
 export const SearchInput = styled.input`
-  width: 330px;
   padding: 8px;
   margin-top: 10px;
   outline: none;
-  border-color: ${props =>
-    props.searchBgColor === 'dark' ? '#909090' : '#0f0f0f'}
+  width: 330px;
   background-color: ${props =>
     props.searchBgColor === 'dark' ? '#0f0f0f' : '#ffffff'};
+  border: ${props =>
+    props.searchBgColor === 'dark' ? '1px solid #909090' : '1px solid #0f0f0f'}
   color: ${props => (props.searchBgColor === 'dark' ? '#ffffff' : '#0f0f0f')};
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 70%;
@@ -102,8 +104,6 @@ export const SearchButton = styled.button`
   cursor: pointer;
 `
 export const SearchVideosContainer = styled.div`
-  background-color: ${props =>
-    props.bgColor === 'dark' ? '#0f0f0f' : '#ebebeb'};
   display: flex;
   flex-direction: column;
   // align-items: flex-start;
@@ -120,6 +120,9 @@ export const VideosContainer = styled.ul`
   align-items: flex-start;
   flex-wrap: wrap;
   margin-left: 0px;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    padding: 5px 20px 5px 20px;
+  }
 `
 export const FailureContainer = styled.div`
   height: 100vh;

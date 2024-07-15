@@ -12,6 +12,7 @@ import {
   ViewsPublishContainer,
   ViewCount,
   YearsAgo,
+  // listWithDisc,
 } from './videoItemStyled'
 import './index.css'
 
@@ -46,8 +47,12 @@ const VideoItem = props => {
                   <VideoTitle color={color}>{title}</VideoTitle>
                   <ChannelName>{name}</ChannelName>
                   <ViewsPublishContainer>
-                    <ViewCount>{viewCount} views *</ViewCount>
-                    <YearsAgo>{daysAgo} years ago</YearsAgo>
+                    <listWithDisc>
+                      <ViewCount>{viewCount} views</ViewCount>
+                    </listWithDisc>
+                    <li>
+                      <YearsAgo>{daysAgo} years ago</YearsAgo>
+                    </li>
                   </ViewsPublishContainer>
                 </VideoDescriptionContainer>
               </VideoDetails>

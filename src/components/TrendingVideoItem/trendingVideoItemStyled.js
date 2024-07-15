@@ -30,12 +30,14 @@ export const VideoItemDetails = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   margin-left: 12px;
+  margin-bottom: 0px;
 `
 export const Title = styled.h1`
   color: ${props => (props.color === 'dark' ? '#ffffff' : '#212121')};
   font-family: 'Roboto';
   font-weight: 600;
   font-size: 20px;
+  margin: 0px 0px 2px 0px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     font-size: 15px;
   }
@@ -45,18 +47,22 @@ export const ChannelName = styled.p`
   font-family: 'Roboto';
   font-size: 15px;
   margin-top: 1px;
+  margin-bottom: 1px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     margin: 1px 8px 1px;
   }
 `
 export const ViewsAndPublishedDetailsUl = styled.ul`
   list-style-type: none;
+  width: 130px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 0px;
   margin-left: 0px;
+  padding: 0px;
 `
 export const PubAndViews = styled.p`
   color: ${props => (props.color === 'dark' ? '#e2e8f0' : '#64748b')};
@@ -64,8 +70,9 @@ export const PubAndViews = styled.p`
   font-size: 12px;
 `
 export const PublishedList = styled.li`
-  margin-left: 25px;
-  list-style-type: disc;
+  list-style-type: disc red;
+  margin: 0px;
+  padding: 0px;
 `
 export const DesktopView = styled.div`
   display: flex;
@@ -97,6 +104,7 @@ export const MobileViewVideoDetails = styled.ul`
   align-items: center;
   margin-right: auto;
   margin-left: 0px;
+  padding: 0px;
 `
 export const MobileNameList = styled.li`
   list-style-type: none;

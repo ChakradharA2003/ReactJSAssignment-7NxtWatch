@@ -20,6 +20,7 @@ import {
   FailureHeading,
   FailureImage,
   GamingVideosUnOrderList,
+  GamingContainer,
 } from './gamingStyled'
 
 const apiConstants = {
@@ -154,13 +155,13 @@ class Gaming extends Component {
           const {isDark} = value
           const bgColor = isDark ? 'dark' : 'light'
           return (
-            <>
+            <GamingContainer data-testid="gaming" bgColor={bgColor}>
               <Header />
               <MainContainer>
                 <SectionsList>
                   <SideBar />
                 </SectionsList>
-                <GamingVideosContainer bgColor={bgColor}>
+                <GamingVideosContainer>
                   <GamingHeaderContainer bgColor={bgColor}>
                     <IconContainer bgColor={bgColor}>
                       <SiYoutubegaming size={40} color="#ff0b37" />
@@ -170,7 +171,7 @@ class Gaming extends Component {
                   {this.renderView()}
                 </GamingVideosContainer>
               </MainContainer>
-            </>
+            </GamingContainer>
           )
         }}
       </ActiveMenuThemeSavedVideosContext.Consumer>

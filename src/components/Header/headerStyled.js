@@ -65,12 +65,14 @@ export const LogoutButton = styled.button`
   cursor: pointer;
 `
 export const LogoutPopUpContainer = styled.div`
-  background-color: #ffffff;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  margin: 0px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
     padding: 5px;
@@ -78,7 +80,7 @@ export const LogoutPopUpContainer = styled.div`
 `
 
 export const PopUpQuestion = styled.p`
-  color: #00306e;
+  color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#00306e')};
   font-family: 'Roboto';
   font-size: 20px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
@@ -120,4 +122,25 @@ export const ConfirmButton = styled.button`
     padding: 7px;
     font-size: 12px;
   }
+`
+export const SectionsListPopUpContainer = styled.div`
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+`
+export const SectionsPopupCloseButton = styled.button`
+  align-self: flex-end;
+  background-color: transparent;
+  border-width: 0px;
+`
+export const DisplaySectionsButton = styled.button`
+  margin-right: 20px;
+  background-color: transparent;
+  border-width: 0px;
 `

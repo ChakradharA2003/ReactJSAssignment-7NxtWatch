@@ -9,7 +9,7 @@ import {
   ChannelName,
   ViewsAndPublishedDetailsUl,
   PubAndViews,
-  PublishedList,
+  // PublishedList,
   DesktopView,
   MobileView,
   ChannelImage,
@@ -51,9 +51,9 @@ const TrendingVideoItem = props => {
                           {viewCount} Views
                         </PubAndViews>
                       </li>
-                      <PublishedList>
+                      <li className="list-style-color">
                         <PubAndViews color={color}>{daysAgo} Years</PubAndViews>
-                      </PublishedList>
+                      </li>
                     </ViewsAndPublishedDetailsUl>
                   </VideoItemDetails>
                 </VideoItemList>

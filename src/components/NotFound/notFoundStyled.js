@@ -12,7 +12,8 @@ export const SectionsList = styled.div`
 `
 
 export const NotFoundDetailsContainer = styled.div`
-  background-color: #f1f1f1;
+  background-color: ${props =>
+    props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -32,10 +33,10 @@ export const NotFoundImage = styled.img`
   }
 `
 export const NotFoundHeading = styled.h1`
-  color: #000000;
+  color: ${props => (props.theme === 'dark' ? '#ffffff' : '#000000')};
 `
 export const NotFoundDescription = styled.p`
-  color: #212121;
+  color: ${props => (props.theme === 'dark' ? '#d7dfe9' : '#212121')};
   font-size: 20px;
   font-weight: 400;
   text-align: center;
