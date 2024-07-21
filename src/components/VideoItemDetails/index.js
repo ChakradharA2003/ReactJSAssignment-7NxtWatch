@@ -344,7 +344,7 @@ class VideoItemDetails extends Component {
       <FailureDescription>
         We are having some trouble to complete your request.Please try again.
       </FailureDescription>
-      <RetryButton as="button" type="button" onClick={this.getVideoDetails()}>
+      <RetryButton as="button" type="button" onClick={this.getVideoDetails}>
         Retry
       </RetryButton>
     </FailureView>

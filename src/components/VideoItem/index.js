@@ -38,8 +38,8 @@ const VideoItem = props => {
         const {isDark} = value
         const color = isDark ? 'dark' : 'light'
         return (
-          <Link to={`/videos/${id}`} className="link-item">
-            <LinkItem>
+          <LinkItem>
+            <Link to={`/videos/${id}`} className="link-item">
               <ThumbNailImage src={thumbnailUrl} alt="video thumbnail" />
               <VideoDetails>
                 <ChannelImage src={profileImageUrl} alt="channel logo" />
@@ -56,8 +56,8 @@ const VideoItem = props => {
                   </ViewsPublishContainer>
                 </VideoDescriptionContainer>
               </VideoDetails>
-            </LinkItem>
-          </Link>
+            </Link>
+          </LinkItem>
         )
       }}
     </ActiveMenuThemeSavedVideosContext.Consumer>

@@ -114,7 +114,7 @@ class Gaming extends Component {
             <FailureDescription color={color}>
               Please try again.
             </FailureDescription>
-            <FailureButton type="button" onClick={this.getHomeRouteDetails()}>
+            <FailureButton type="button" onClick={this.getHomeRouteDetails}>
               Retry
             </FailureButton>
           </FailureContainer>

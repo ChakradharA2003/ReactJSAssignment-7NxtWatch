@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Trending from './components/Trending'
 import Gaming from './components/Gaming'
 import VideoItemDetails from './components/VideoItemDetails'
+import SavedVideos from './components/SavedVideos'
 import NotFound from './components/NotFound'
 import ActiveMenuThemeSavedVideosContext from './Context/ActiveMenuThemeSavedVideosContext'
 import './App.css'
@@ -44,8 +45,10 @@ class App extends Component {
   }
 
   updateSavedVideos = details => {
-    const {savedVideos} = this.state
-    const updatedVideos = savedVideos.filter(video => video.id !== details.id)
+    const {savedVideosList} = this.state
+    const updatedVideos = savedVideosList.filter(
+      video => video.id !== details.id,
+    )
     this.setState({savedVideosList: updatedVideos})
   }
 
@@ -66,14 +69,14 @@ class App extends Component {
   }
 
   render() {
-    const {activeMenu, isDark, savedVideos} = this.state
-    console.log(savedVideos)
+    const {activeMenu, isDark, savedVideosList} = this.state
+    // console.log(savedVideos)
     return (
       <ActiveMenuThemeSavedVideosContext.Provider
         value={{
           activeMenu,
           isDark,
-          savedVideos,
+          savedVideosList,
           changeActiveMenu: this.changeActiveMenu,
           changeTheme: this.changeTheme,
           saveVideo: this.saveVideo,
@@ -90,6 +93,7 @@ class App extends Component {
             path="/videos/:id"
             component={VideoItemDetails}
           />
+          <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
           <ProtectedRoute path="/not-found" component={NotFound} />
           <Redirect to="/not-found" />
         </Switch>

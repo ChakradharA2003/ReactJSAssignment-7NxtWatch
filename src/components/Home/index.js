@@ -133,7 +133,7 @@ class Home extends Component {
               We are having some trouble to complete your request.
             </FailureDescription>
             <FailureDescription>Please try again.</FailureDescription>
-            <FailureButton type="button" onClick={this.getHomeRouteDetails()}>
+            <FailureButton type="button" onClick={this.getHomeRouteDetails}>
               Retry
             </FailureButton>
           </FailureContainer>
