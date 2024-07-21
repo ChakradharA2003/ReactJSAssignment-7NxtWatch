@@ -234,6 +234,7 @@ class Home extends Component {
                       <GetButton type="button">GET IT NOW</GetButton>
                     </BannerDetailsContainer>
                     <BannerCloseButton
+                      data-testid="close"
                       type="button"
                       onClick={this.onClickCloseBanner}
                     >

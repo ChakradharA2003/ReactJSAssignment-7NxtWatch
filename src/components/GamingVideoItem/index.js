@@ -22,7 +22,7 @@ const GamingVideoItem = props => {
               <VideoThumbNail
                 as="img"
                 src={thumbNailUrl}
-                alt="thumbnail image"
+                alt="video thumbnail"
               />
               <GamingVideoTitle color={color}>{title}</GamingVideoTitle>
               <GamingVideoViewCount color={color}>

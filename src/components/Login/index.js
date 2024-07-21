@@ -77,7 +77,10 @@ class Login extends Component {
     return (
       <LoginContainer>
         <LoginCard>
-          <NxtWatchLogo src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
+          <NxtWatchLogo
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+            alt="website logo"
+          />
           <LoginForm onSubmit={this.onSubmitLoginForm}>
             <LoginElement>
               <LabelElement htmlFor="username">USERNAME</LabelElement>
@@ -109,7 +112,9 @@ class Login extends Component {
                 Show Password
               </PasswordLabel>
             </PasswordEnabler>
-            <LoginButton type="submit">Login</LoginButton>
+            <LoginButton type="submit" onClick={this.onSubmitLoginForm}>
+              Login
+            </LoginButton>
             <ErrorMessage>{errorMessage}</ErrorMessage>
           </LoginForm>
         </LoginCard>

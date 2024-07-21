@@ -20,7 +20,7 @@ export const VideoThumbNail = styled.img`
     height: 200px;
   }
 `
-export const GamingVideoTitle = styled.h1`
+export const GamingVideoTitle = styled.p`
   color: ${props => (props.color === 'dark' ? '#ffffff' : '#475569')};
   font-family: 'Roboto';
   font-size: 14px;

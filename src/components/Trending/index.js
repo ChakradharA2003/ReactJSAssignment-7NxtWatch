@@ -82,8 +82,8 @@ class Trending extends Component {
       {value => {
         const {isDark} = value
         return (
-          <LoadingView>
-            <div className="loader-container" data-testid="loader">
+          <LoadingView data-testid="loader">
+            <div className="loader-container">
               <Loader
                 type="ThreeDots"
                 color={isDark ? '#ffffff' : '#0f0f0f'}
@@ -171,7 +171,7 @@ class Trending extends Component {
                       <IconContainer bgColor={bgColor}>
                         <AiFillFire color="#ff0b37" size={40} />
                       </IconContainer>
-                      <TrendingHeader bgColor={bgColor}>
+                      <TrendingHeader as="h1" bgColor={bgColor}>
                         Trending
                       </TrendingHeader>
                     </TrendingHeaderContainer>

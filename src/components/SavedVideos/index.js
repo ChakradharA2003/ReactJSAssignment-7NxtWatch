@@ -60,7 +60,7 @@ class SavedVideos extends Component {
               </>
             )
           return (
-            <MainContainer data-testid="trending" bgColor={bgColor}>
+            <MainContainer data-testid="savedVideos" bgColor={bgColor}>
               <Header />
               <TrendingContentContainer>
                 <SectionsList>

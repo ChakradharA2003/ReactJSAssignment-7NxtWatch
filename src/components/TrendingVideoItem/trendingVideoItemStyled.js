@@ -32,7 +32,7 @@ export const VideoItemDetails = styled.div`
   margin-left: 12px;
   margin-bottom: 0px;
 `
-export const Title = styled.h1`
+export const Title = styled.p`
   color: ${props => (props.color === 'dark' ? '#ffffff' : '#212121')};
   font-family: 'Roboto';
   font-weight: 600;

@@ -35,7 +35,7 @@ export const VideoDescriptionContainer = styled.div`
   height: 100%;
   margin: 0px 10px 0px;
 `
-export const VideoTitle = styled.h1`
+export const VideoTitle = styled.p`
   color: ${props => (props.color === 'dark' ? '#f8fafc' : '#231f20')};
   font-family: 'Roboto';
   font-size: 14px;
@@ -58,7 +58,7 @@ export const ViewsPublishContainer = styled.ul`
   padding: 0px;
   list-style-type: none;
 `
-export const listWithDisc = styled.li`
+export const ListWithDisc = styled.li`
   list-style-type: disc;
   margin-left: 14px;
 `

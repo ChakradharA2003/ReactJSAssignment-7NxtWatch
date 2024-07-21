@@ -73,18 +73,30 @@ const Header = props => (
               </Buttons>
               <Popup
                 modal
-                trigger={<LogoutButton type="button">Logout</LogoutButton>}
+                trigger={
+                  <LogoutButton as="button" type="button">
+                    Logout
+                  </LogoutButton>
+                }
               >
                 {close => (
                   <LogoutPopUpContainer bgColor={bgColor}>
-                    <PopUpQuestion bgColor={bgColor}>
+                    <PopUpQuestion as="p" bgColor={bgColor}>
                       Are you sure you want to logout?
                     </PopUpQuestion>
                     <PopUpButtonsContainer>
-                      <CancelButton type="button" onClick={() => close()}>
+                      <CancelButton
+                        as="button"
+                        type="button"
+                        onClick={() => close()}
+                      >
                         Cancel
                       </CancelButton>
-                      <ConfirmButton type="button" onClick={onClickedLogOut}>
+                      <ConfirmButton
+                        as="button"
+                        type="button"
+                        onClick={onClickedLogOut}
+                      >
                         Confirm
                       </ConfirmButton>
                     </PopUpButtonsContainer>

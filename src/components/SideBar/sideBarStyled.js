@@ -15,13 +15,15 @@ export const SideBarContactDetails = styled.div`
   align-items: flex-start;
   margin: 8px;
 `
-export const ContactHeading = styled.h1`
+export const ContactHeading = styled.p`
   color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#00306e')};
   font-size: 25px;
   font-family: 'Roboto';
   font-weight: 600;
 `
-export const SocialMediaLogos = styled.div`
+export const SocialMediaLogos = styled.ul`
+  padding: 0px;
+  list-style-type: none;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
