@@ -31,7 +31,22 @@ export const VideoItemDetails = styled.div`
   align-items: flex-start;
   margin-left: 12px;
   margin-bottom: 0px;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    margin-top: 6px;
+  }
 `
+export const VideoItemSubDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+`
+
 export const Title = styled.p`
   color: ${props => (props.color === 'dark' ? '#ffffff' : '#212121')};
   font-family: 'Roboto';
@@ -77,7 +92,7 @@ export const PublishedList = styled.li`
 export const DesktopView = styled.div`
   display: flex;
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    display: none;
+    display: flex;
   }
 `
 export const MobileView = styled.div`
@@ -93,8 +108,12 @@ export const MobileChannelDetails = styled.div`
   margin-top: 3px;
 `
 export const ChannelImage = styled.img`
-  height: 50px;
-  width: 50px;
+  display: none;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    display: flex;
+    height: 50px;
+    width: 50px;
+  }
 `
 export const MobileViewVideoDetails = styled.ul`
   list-style-type: disc;

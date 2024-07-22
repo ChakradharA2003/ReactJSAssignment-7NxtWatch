@@ -159,27 +159,25 @@ class Trending extends Component {
           const {isDark} = value
           const bgColor = isDark ? 'dark' : 'light'
           return (
-            <>
-              <MainContainer data-testid="trending" bgColor={bgColor}>
-                <Header />
-                <TrendingContentContainer>
-                  <SectionsList>
-                    <SideBar />
-                  </SectionsList>
-                  <TrendingDetailsContainer bgColor={bgColor}>
-                    <TrendingHeaderContainer bgColor={bgColor}>
-                      <IconContainer bgColor={bgColor}>
-                        <AiFillFire color="#ff0b37" size={40} />
-                      </IconContainer>
-                      <TrendingHeader as="h1" bgColor={bgColor}>
-                        Trending
-                      </TrendingHeader>
-                    </TrendingHeaderContainer>
-                    {this.renderView()}
-                  </TrendingDetailsContainer>
-                </TrendingContentContainer>
-              </MainContainer>
-            </>
+            <MainContainer data-testid="trending" bgColor={bgColor}>
+              <Header />
+              <TrendingContentContainer>
+                <SectionsList>
+                  <SideBar />
+                </SectionsList>
+                <TrendingDetailsContainer bgColor={bgColor}>
+                  <TrendingHeaderContainer bgColor={bgColor}>
+                    <IconContainer bgColor={bgColor}>
+                      <AiFillFire color="#ff0b37" size={40} />
+                    </IconContainer>
+                    <TrendingHeader as="h1" bgColor={bgColor}>
+                      Trending
+                    </TrendingHeader>
+                  </TrendingHeaderContainer>
+                  {this.renderView()}
+                </TrendingDetailsContainer>
+              </TrendingContentContainer>
+            </MainContainer>
           )
         }}
       </ActiveMenuThemeSavedVideosContext.Consumer>

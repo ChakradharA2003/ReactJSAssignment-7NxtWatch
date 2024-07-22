@@ -18,6 +18,7 @@ import {
   NoSavedVideosImage,
   NoSavedVideosHeading,
   NoSavedVideosDescription,
+  SavedVideosContainer,
 } from './savedvideosStyled'
 
 class SavedVideos extends Component {
@@ -43,7 +44,7 @@ class SavedVideos extends Component {
                 </NoSavedVideosDescription>
               </NoSavedVideosContainer>
             ) : (
-              <>
+              <SavedVideosContainer>
                 <TrendingHeaderContainer bgColor={bgColor}>
                   <IconContainer bgColor={bgColor}>
                     <RiMenuAddLine color="#ff0b37" size={40} />
@@ -57,7 +58,7 @@ class SavedVideos extends Component {
                     <TrendingVideoItem key={video.id} details={video} />
                   ))}
                 </TrendingVideosUnOrderList>
-              </>
+              </SavedVideosContainer>
             )
           return (
             <MainContainer data-testid="savedVideos" bgColor={bgColor}>

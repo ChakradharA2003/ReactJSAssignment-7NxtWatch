@@ -19,7 +19,7 @@ const NotFound = () => (
         ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-dark-theme-img.png'
         : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png'
       return (
-        <>
+        <div>
           <Header />
           <NotFoundMainContainer>
             <SectionsList>
@@ -33,7 +33,7 @@ const NotFound = () => (
               </NotFoundDescription>
             </NotFoundDetailsContainer>
           </NotFoundMainContainer>
-        </>
+        </div>
       )
     }}
   </ActiveMenuThemeSavedVideosContext.Consumer>

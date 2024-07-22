@@ -102,8 +102,8 @@ class Home extends Component {
       {value => {
         const {isDark} = value
         return (
-          <LoadingContainer>
-            <div className="loader-container" data-testid="loader">
+          <LoadingContainer data-testid="loader">
+            <div className="loader-container">
               <Loader
                 type="ThreeDots"
                 color={isDark ? '#ffffff' : '#0f0f0f'}
@@ -254,7 +254,6 @@ class Home extends Component {
                       <SearchButton
                         data-testid="searchButton"
                         searchButColor={bgColor}
-                        as="button"
                         type="button"
                         onClick={this.onSearchVideo}
                       >

@@ -79,8 +79,8 @@ class Gaming extends Component {
       {value => {
         const {isDark} = value
         return (
-          <LoadingView>
-            <div className="loader-container" data-testid="loader">
+          <LoadingView data-testid="loader">
+            <div className="loader-container">
               <Loader
                 type="ThreeDots"
                 color={isDark ? '#ffffff' : '#0f0f0f'}

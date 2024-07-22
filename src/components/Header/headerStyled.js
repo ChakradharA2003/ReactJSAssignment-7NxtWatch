@@ -9,9 +9,10 @@ export const DesktopHeaderContainer = styled.div`
   align-items: center;
   padding: 20px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    display: none;
+    padding: 8px;
   }
 `
+/*
 export const MobileHeaderContainer = styled.div`
   background-color: ${props =>
     props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
@@ -20,18 +21,21 @@ export const MobileHeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 8px;
-  @media screen and (min-width: 767px) and (orientation: landscape) {
+  display: none;
+  @media screen and (max-width: 767px) and (orientation: landscape) {
     display: none;
   }
 `
+*/
 export const WebsiteLogo = styled.img`
   height: 50px;
   width: 200px;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    height: 30px;
+    width: 100px;
+  }
 `
-export const MobileWebsiteLogo = styled.img`
-  height: 30px;
-  width: 100px;
-`
+export const MobileWebsiteLogo = styled.img``
 export const HeaderOptionsContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -49,10 +53,20 @@ export const Buttons = styled.button`
   border-width: 0px;
   cursor: pointer;
   margin-right: 20px;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    height: 25px;
+    width: 25px;
+    margin-right: 0px;
+    text-align: center;
+    padding: 0px;
+  }
 `
 export const ProfileImage = styled.img`
   height: 40px;
   width: 40px;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    display: none;
+  }
 `
 export const LogoutButton = styled.button`
   background-color: transparent;
@@ -63,7 +77,19 @@ export const LogoutButton = styled.button`
   text-align: center;
   padding: 10px;
   cursor: pointer;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    display: none;
+  }
 `
+export const MobileLogoutButton = styled.button`
+  display: none;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    display: flex;
+    background-color: transparent;
+    border-width: 0px;
+  }
+`
+
 export const LogoutPopUpContainer = styled.div`
   background-color: ${props =>
     props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
@@ -140,7 +166,11 @@ export const SectionsPopupCloseButton = styled.button`
   border-width: 0px;
 `
 export const DisplaySectionsButton = styled.button`
-  margin-right: 20px;
-  background-color: transparent;
-  border-width: 0px;
+  display: none;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    display: flex;
+    margin-right: 20px;
+    background-color: transparent;
+    border-width: 0px;
+  }
 `

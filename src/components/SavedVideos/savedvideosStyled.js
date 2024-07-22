@@ -15,9 +15,14 @@ export const SectionsList = styled.div`
   width: 30%;
   height: 100vh;
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 0%;
+    display: none;
   }
 `
+export const SavedVideosContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export const TrendingDetailsContainer = styled.div`
   background-color: ${props =>
     props.bgColor === 'dark' ? '#0f0f0f' : '#f9f9f9'};
@@ -108,8 +113,16 @@ export const NoSavedVideosHeading = styled.h1`
   color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#0f0f0f')};
   font-size: 35px;
   font-weight: 600;
+  text-align: center;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    font-size: 20px;
+  }
 `
 export const NoSavedVideosDescription = styled.p`
   color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#475569')};
   font-size: 20px;
+  text-align: center;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    font-size: 15px;
+  }
 `

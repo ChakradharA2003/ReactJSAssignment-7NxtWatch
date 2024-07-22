@@ -10,14 +10,15 @@ import SectionItems from '../SectionItems'
 import ActiveMenuThemeSavedVideos from '../../Context/ActiveMenuThemeSavedVideosContext'
 import {
   DesktopHeaderContainer,
-  MobileHeaderContainer,
+  // MobileHeaderContainer,
   WebsiteLogo,
-  MobileWebsiteLogo,
+  // MobileWebsiteLogo,
   HeaderOptionsContainer,
-  MobileHeaderOptionsContainer,
+  // MobileHeaderOptionsContainer,
   Buttons,
   ProfileImage,
   LogoutButton,
+  MobileLogoutButton,
   LogoutPopUpContainer,
   PopUpQuestion,
   PopUpButtonsContainer,
@@ -46,11 +47,13 @@ const Header = props => (
       ) : (
         <FaMoon size={30} color="#0f0f0f" />
       )
+      /*
       const changeThemeIconMobile = isDark ? (
         <FiSun size={20} color="#f9f9f9" />
       ) : (
         <FaMoon size={20} color="#0f0f0f" />
       )
+      */
       return (
         <>
           <DesktopHeaderContainer bgColor={bgColor}>
@@ -70,52 +73,6 @@ const Header = props => (
                   src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
                   alt="profile"
                 />
-              </Buttons>
-              <Popup
-                modal
-                trigger={
-                  <LogoutButton as="button" type="button">
-                    Logout
-                  </LogoutButton>
-                }
-              >
-                {close => (
-                  <LogoutPopUpContainer bgColor={bgColor}>
-                    <PopUpQuestion as="p" bgColor={bgColor}>
-                      Are you sure you want to logout?
-                    </PopUpQuestion>
-                    <PopUpButtonsContainer>
-                      <CancelButton
-                        as="button"
-                        type="button"
-                        onClick={() => close()}
-                      >
-                        Cancel
-                      </CancelButton>
-                      <ConfirmButton
-                        as="button"
-                        type="button"
-                        onClick={onClickedLogOut}
-                      >
-                        Confirm
-                      </ConfirmButton>
-                    </PopUpButtonsContainer>
-                  </LogoutPopUpContainer>
-                )}
-              </Popup>
-            </HeaderOptionsContainer>
-          </DesktopHeaderContainer>
-          <MobileHeaderContainer bgColor={bgColor}>
-            <Link to="/">
-              <MobileWebsiteLogo src={websiteLogo} alt="website logo" />
-            </Link>
-            <MobileHeaderOptionsContainer>
-              <Buttons
-                data-testid="theme"
-                type="button"
-                onClick={() => changeTheme()}
-              >
-                {changeThemeIconMobile}
               </Buttons>
               <Popup
                 modal
@@ -145,8 +102,89 @@ const Header = props => (
               </Popup>
               <Popup
                 modal
+                trigger={<LogoutButton type="button">Logout</LogoutButton>}
+              >
+                {close => (
+                  <LogoutPopUpContainer bgColor={bgColor}>
+                    <PopUpQuestion bgColor={bgColor}>
+                      Are you sure you want to logout?
+                    </PopUpQuestion>
+                    <PopUpButtonsContainer>
+                      <CancelButton
+                        as="button"
+                        type="button"
+                        onClick={() => close()}
+                      >
+                        Cancel
+                      </CancelButton>
+                      <ConfirmButton
+                        as="button"
+                        type="button"
+                        onClick={onClickedLogOut}
+                      >
+                        Confirm
+                      </ConfirmButton>
+                    </PopUpButtonsContainer>
+                  </LogoutPopUpContainer>
+                )}
+              </Popup>
+              <Popup
+                modal
                 trigger={
-                  <FiLogOut size={20} color={isDark ? '#f9f9f9' : '#0f0f0f'} />
+                  <MobileLogoutButton type="button">
+                    <FiLogOut
+                      size={20}
+                      color={isDark ? '#f9f9f9' : '#0f0f0f'}
+                    />
+                  </MobileLogoutButton>
+                }
+              >
+                {close => (
+                  <LogoutPopUpContainer bgColor={bgColor}>
+                    <PopUpQuestion bgColor={bgColor}>
+                      Are you sure you want to logout?
+                    </PopUpQuestion>
+                    <PopUpButtonsContainer>
+                      <CancelButton type="button" onClick={() => close()}>
+                        Cancel
+                      </CancelButton>
+                      <ConfirmButton type="button" onClick={onClickedLogOut}>
+                        Confirm
+                      </ConfirmButton>
+                    </PopUpButtonsContainer>
+                  </LogoutPopUpContainer>
+                )}
+              </Popup>
+            </HeaderOptionsContainer>
+          </DesktopHeaderContainer>
+        </>
+      )
+    }}
+  </ActiveMenuThemeSavedVideos.Consumer>
+)
+
+export default withRouter(Header)
+
+/*
+<MobileHeaderContainer bgColor={bgColor}>
+            <Link to="/">
+              <MobileWebsiteLogo src={websiteLogo} alt="website logo" />
+            </Link>
+            <MobileHeaderOptionsContainer>
+              <Buttons
+                data-testid="theme"
+                type="button"
+                onClick={() => changeTheme()}
+              >
+                {changeThemeIconMobile}
+              </Buttons>
+
+              <Popup
+                modal
+                trigger={
+                   <MobileLogoutButton type="button">
+                      <FiLogOut size={20} color={isDark ? '#f9f9f9' : '#0f0f0f'} />
+                   </MobileLogoutButton>  
                 }
               >
                 {close => (
@@ -167,10 +205,4 @@ const Header = props => (
               </Popup>
             </MobileHeaderOptionsContainer>
           </MobileHeaderContainer>
-        </>
-      )
-    }}
-  </ActiveMenuThemeSavedVideos.Consumer>
-)
-
-export default withRouter(Header)
+*/

@@ -9,7 +9,7 @@ export const SectionsList = styled.div`
   width: 30%;
   height: 100vh;
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 0%;
+    display: none;
   }
 `
 export const GamingContainer = styled.div`

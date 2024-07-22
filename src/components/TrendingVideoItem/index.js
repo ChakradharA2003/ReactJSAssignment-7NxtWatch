@@ -11,11 +11,12 @@ import {
   PubAndViews,
   // PublishedList,
   DesktopView,
-  MobileView,
+  // MobileView,
   ChannelImage,
-  MobileChannelDetails,
-  MobileViewVideoDetails,
-  MobileNameList,
+  // MobileChannelDetails,
+  // MobileViewVideoDetails,
+  // MobileNameList,
+  VideoItemSubDetails,
 } from './trendingVideoItemStyled'
 import './index.css'
 
@@ -33,33 +34,51 @@ const TrendingVideoItem = props => {
         const {isDark} = value
         const color = isDark ? 'dark' : 'light'
         return (
-          <>
-            <DesktopView>
-              <Link to={`/videos/${id}`} className="link-item">
-                <VideoItemList>
-                  <ThumbNailImage
+          <DesktopView>
+            <Link to={`/videos/${id}`} className="link-item">
+              <VideoItemList>
+                <ThumbNailImage
+                  as="img"
+                  src={thumbNailUrl}
+                  alt="video thumbnail"
+                />
+                <VideoItemSubDetails>
+                  <ChannelImage
                     as="img"
-                    src={thumbNailUrl}
-                    alt="video thumbnail"
+                    src={profileImageUrl}
+                    alt="channel logo"
                   />
                   <VideoItemDetails>
                     <Title color={color}>{title}</Title>
-                    <ChannelName color={color}>{name}</ChannelName>
-                    <ViewsAndPublishedDetailsUl>
-                      <li>
-                        <PubAndViews color={color}>
-                          {viewCount} Views
-                        </PubAndViews>
-                      </li>
-                      <li className="list-style-color">
-                        <PubAndViews color={color}>{daysAgo} Years</PubAndViews>
-                      </li>
-                    </ViewsAndPublishedDetailsUl>
+                    <VideoItemSubDetails>
+                      <ChannelName color={color}>{name}</ChannelName>
+                      <ViewsAndPublishedDetailsUl>
+                        <li>
+                          <PubAndViews color={color}>
+                            {viewCount} Views
+                          </PubAndViews>
+                        </li>
+                        <li className="list-style-color">
+                          <PubAndViews color={color}>
+                            {daysAgo} Years
+                          </PubAndViews>
+                        </li>
+                      </ViewsAndPublishedDetailsUl>
+                    </VideoItemSubDetails>
                   </VideoItemDetails>
-                </VideoItemList>
-              </Link>
-            </DesktopView>
-            <MobileView>
+                </VideoItemSubDetails>
+              </VideoItemList>
+            </Link>
+          </DesktopView>
+        )
+      }}
+    </ActiveMenuThemeSavedVideosContext.Consumer>
+  )
+}
+export default TrendingVideoItem
+
+/*
+<MobileView>
               <Link to={`/videos/${id}`} className="link-item">
                 <VideoItemList>
                   <ThumbNailImage
@@ -95,10 +114,5 @@ const TrendingVideoItem = props => {
                 </VideoItemList>
               </Link>
             </MobileView>
-          </>
-        )
-      }}
-    </ActiveMenuThemeSavedVideosContext.Consumer>
-  )
-}
-export default TrendingVideoItem
+
+*/

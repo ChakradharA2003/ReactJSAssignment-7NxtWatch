@@ -41,7 +41,7 @@ export const LoadingContainer = styled.div`
   align-items: center;
   align-self: center;
 `
-export const VideoDescription = styled.h1`
+export const VideoDescription = styled.p`
   font-family: 'Roboto';
   font-size: 18px;
   color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#000000')};
@@ -121,7 +121,7 @@ export const ChannelNameSubscribersContainer = styled.div`
   margin-left: 18px;
   margin-top: 0px;
 `
-export const ChannelName = styled.h1`
+export const ChannelName = styled.p`
   color: ${props => (props.bgColor === 'dark' ? '#ffffff' : '#181818')};
   font-family: 'Roboto';
   font-size: 18px;
@@ -159,7 +159,8 @@ export const DesktopView = styled.div`
   width: 100%;
   height: 100vh;
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    display: none;
+    display: flex;
+    width: 100%;
   }
 `
 export const FailureView = styled.div`
